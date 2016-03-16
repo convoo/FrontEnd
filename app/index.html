@@ -146,13 +146,9 @@
                             <paper-material elevation="1">
                                 <h2 class="page-title">Users</h2>
                                 <p>This is the users section</p>
-                                <a href$="{{baseUrl}}users/Addy">Addy</a>
+                                <a href$="{{baseUrl}}users/Addy"> Addy</a>
                                 <br>
-                                <a href$="{{baseUrl}}users/Rob">Rob</a>
-                                <br>
-                                <a href$="{{baseUrl}}users/Chuck">Chuck</a>
-                                <br>
-                                <a href$="{{baseUrl}}users/Sam">Sam</a>
+                    
                             </paper-material>
                         </section>
 
@@ -184,16 +180,17 @@
 
  <!--//------------------ SERVICE WORKER -------------------- // -->
  
-
+<!--
 
     <platinum-sw-register auto-register
                           clients-claim
                           skip-waiting
-                          base-uri="bower_components/platinum-sw/bootstrap">
+                          base-uri="bower_components/platinum-sw/bootstrap"
+                          on-service-worker-installed="displayInstalledToast">
       <platinum-sw-cache default-cache-strategy="fastest"
                          cache-config-file="cache-config.json">
       </platinum-sw-cache>
-    </platinum-sw-register>
+    </platinum-sw-register>-->
  
   <!--//------------------ SERVICE WORKER END -------------------- // -->
 

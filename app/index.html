@@ -1,0 +1,208 @@
+<!doctype html>
+
+<html lang="en">
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# video: http://ogp.me/ns/video#">
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
+    <base href="/">
+    <meta name="description" content="Convoo">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="@teamconvoo" name="twitter:site">
+    <meta content="Convoo" name="twitter:title">
+    <meta content="@teamconvoo" name="twitter:creator">
+    <meta content="The future of conversations today" name="twitter:description">
+    <meta content="http://imagePath.png" name="twitter:image">
+    <meta content="http://www.website.com" property="og:url">
+    <meta content="convoo" property="og:site_name">
+    <meta content="Convoo" property="og:title">
+    <meta content="http://www.imagePath.png" property="og:image">
+    <meta content="product" property="og:type">
+    <link rel="apple-touch-icon" sizes="57x57" href="images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon-16x16.png">
+    <meta name="msapplication-TileImage" content="images/icons/apple-icon-114x114.png">
+    <link rel="shortcut icon" href="images/icons/favicon.ico">
+    <link rel="manifest" href="images/icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff"> 
+    <meta name="theme-color" content="#ffffff">  
+    <meta name="msapplication-config" content="images/icons/browserconfig.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="APP NAME">
+    <meta name="apple-itunes-app" content="app-id=####">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Convoo">
+  
+
+
+    <title>Convoo</title>
+    
+    <script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
+    
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild-->
+
+    <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <!-- endbuild -->
+
+    <link rel="import" href="elements/elements.html">
+    <style is="custom-style" include="shared-styles"></style>
+</head>
+
+
+
+<body unresolved>
+    <span id="browser-sync-binding"></span>
+    <template is="dom-bind" id="app">
+
+        <paper-drawer-panel id="paperDrawerPanel">
+            <!-- Drawer Scroll Header Panel -->
+            <paper-scroll-header-panel drawer fixed>
+
+                <!-- Drawer Toolbar -->
+                <paper-toolbar id="drawerToolbar">
+                    <span class="menu-name">Menu</span>
+                </paper-toolbar>
+
+                <!-- Drawer Content -->
+                <paper-menu attr-for-selected="data-route" selected="[[route]]">
+                    <a data-route="home" href="{{baseUrl}}">
+                        <iron-icon icon="home"></iron-icon>
+                        <span>Home</span>
+                    </a>
+
+                    <a data-route="users" href="{{baseUrl}}users">
+                        <iron-icon icon="info"></iron-icon>
+                        <span>Users</span>
+                    </a>
+
+                    <a data-route="contact" href="{{baseUrl}}contact">
+                        <iron-icon icon="mail"></iron-icon>
+                        <span>Contact</span>
+                    </a>
+                </paper-menu>
+            </paper-scroll-header-panel>
+
+            <!-- Main Area -->
+            <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
+                <!-- Main Toolbar -->
+                <paper-toolbar id="mainToolbar" class="tall">
+                    <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+
+                    <span class="space"></span>
+
+                    <!-- Toolbar icons -->
+                    <paper-icon-button icon="refresh"></paper-icon-button>
+                    <paper-icon-button icon="search"></paper-icon-button>
+
+                    <!-- Application name -->
+                    <div class="middle middle-container">
+                        <div class="app-name">Convoo</div>
+                    </div>
+
+                    <!-- Application sub title -->
+                    <div class="bottom bottom-container">
+                        <div class="bottom-title">The future of conversations today</div>
+                    </div>
+                </paper-toolbar>
+
+                <!-- Main Content -->
+                <div class="content">
+                    <iron-pages attr-for-selected="data-route" selected="{{route}}">
+
+                        <!--//------------------ HOME -------------------- // -->
+
+                        <section data-route="home">
+                            <paper-material elevation="1">
+                                <h2 class="page-title">Home</h2>
+
+                            </paper-material>
+
+                            <paper-material elevation="1">
+                                <p>...</p>
+                            </paper-material>
+
+
+                        </section>
+
+                        <!--//------------------ USERS -------------------- // -->
+
+                        <section data-route="users">
+                            <paper-material elevation="1">
+                                <h2 class="page-title">Users</h2>
+                                <p>This is the users section</p>
+                                <a href$="{{baseUrl}}users/Addy">Addy</a>
+                                <br>
+                                <a href$="{{baseUrl}}users/Rob">Rob</a>
+                                <br>
+                                <a href$="{{baseUrl}}users/Chuck">Chuck</a>
+                                <br>
+                                <a href$="{{baseUrl}}users/Sam">Sam</a>
+                            </paper-material>
+                        </section>
+
+                        <!--//------------------ USR INFO -------------------- // -->
+
+                        <section data-route="user-info">
+                            <paper-material elevation="1">
+                                <h2 class="page-title">User: {{params.name}}</h2>
+                                <div>This is {{params.name}}'s section</div>
+                            </paper-material>
+                        </section>
+
+                        <!--//------------------ CONTACT -------------------- // -->
+
+                        <section data-route="contact">
+                            <paper-material elevation="1">
+                                <h2 class="page-title">Contact</h2>
+                                <p>This is the contact section</p>
+                            </paper-material>
+                        </section>
+                    </iron-pages>
+                </div>
+            </paper-scroll-header-panel>
+        </paper-drawer-panel>
+
+        <paper-toast id="toast">
+            <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+        </paper-toast>
+
+ <!--//------------------ SERVICE WORKER -------------------- // -->
+ 
+
+
+    <platinum-sw-register auto-register
+                          clients-claim
+                          skip-waiting
+                          base-uri="bower_components/platinum-sw/bootstrap">
+      <platinum-sw-cache default-cache-strategy="fastest"
+                         cache-config-file="cache-config.json">
+      </platinum-sw-cache>
+    </platinum-sw-register>
+ 
+  <!--//------------------ SERVICE WORKER END -------------------- // -->
+
+    </template>
+
+    <!-- build:js scripts/app.js -->
+      <script src="scripts/app.js"></script>
+    <script src="scripts/socket.io-1.4.5.js"></script> 
+    <!-- endbuild-->
+</body>
+
+</html>

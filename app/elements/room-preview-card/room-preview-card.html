@@ -1,0 +1,60 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="room-preview-card">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+      }
+    </style>
+    <paper-card heading="{{name}}" elevation="{{elevation}}" image="{{img}}">
+        <div class="card-content">
+            <content></content>
+        </div>
+        <div class="card-actions">
+            <a href$="{{baseUrl}}{{id}}"><paper-button raised>Join</paper-button></a>
+            <template is="dom-if" if="{{featured}}">
+                <span><strong>FEATURED</strong></span>
+            </template>
+        </div>
+    </paper-card>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'room-preview-card',
+
+      properties: {
+        name: String,
+        id: Number,
+        elevation: {
+            type: Number,
+            value: 2
+        },
+        img: {
+            type: String,
+            value: "http://lorempixel.com/200/100"
+        },
+        featured: {
+            type: Boolean,
+            value: false
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>

@@ -19,12 +19,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: inline-block;
       }
     </style>
-    <paper-card heading="{{name}}" elevation="2" image="http://lorempixel.com/400/200">
+    <paper-card heading="{{name}}" elevation="{{elevation}}" image="{{img}}">
         <div class="card-content">
             <content></content>
         </div>
         <div class="card-actions">
             <a href$="{{baseUrl}}{{id}}"><paper-button raised>Join</paper-button></a>
+            <template is="dom-if" if="{{featured}}">
+                <span><strong>FEATURED</strong></span>
+            </template>
         </div>
     </paper-card>
   </template>
@@ -37,7 +40,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       properties: {
         name: String,
-        id: Number
+        id: Number,
+        elevation: {
+            type: Number,
+            value: 2
+        },
+        img: {
+            type: String,
+            value: "http://lorempixel.com/200/100"
+        },
+        featured: {
+            type: Boolean,
+            value: false
+        }
       }
     });
   })();

@@ -24,7 +24,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
-    <section onclick="clickHandler(event)">
+    <section onclick="addRoom(event)">
         
       
         <paper-button  data-dialog="add-room-modal">Add Room</paper-button>
@@ -47,7 +47,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'room-add'
     });
   })();
-  function clickHandler(e) {
+  function addRoom(e) {
       var button = e.target;
       while (!button.hasAttribute('data-dialog') && button !== document.body) {
           button = button.parentElement;

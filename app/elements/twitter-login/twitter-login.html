@@ -17,24 +17,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
  
-<dom-module id="room-add">
+<dom-module id="twitter-login">
   <template>
     <style>
       :host {
         display: block;
       }
     </style>
-    <section onclick="clickHandler(event)">
+    <section onclick="loginTwitter(event)">
         
       
-        <paper-button  data-dialog="add-room-modal">Add Room</paper-button>
+        <paper-button  data-dialog="login-modal">Login</paper-button>
       
-        <paper-dialog id="add-room-modal" modal>
-          <h2>Add Room</h2>
-          <paper-input label="Room Name"></paper-input>
+        <paper-dialog id="login-modal" modal>
+          <h2>Login</h2>
             <div class="buttons">
-                <paper-button dialog-confirm autofocus>Add Room</paper-button>
-                <paper-button dialog-confirm autofocus>Close</paper-button>
+                <paper-button dialog-confirm autofocus>Go to Twitter</paper-button>
+                <paper-button dialog-confirm autofocus>Cancel</paper-button>
             </div>
         </paper-dialog>
     </section>
@@ -44,10 +43,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     'use strict';
  
     new Polymer({
-      is: 'room-add'
+      is: 'twitter-login'
     });
   })();
-  function clickHandler(e) {
+  function loginTwitter(e) {
       var button = e.target;
       while (!button.hasAttribute('data-dialog') && button !== document.body) {
           button = button.parentElement;

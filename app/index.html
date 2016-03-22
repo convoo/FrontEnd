@@ -66,9 +66,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <span id="browser-sync-binding"></span>
     <template is="dom-bind" id="app">
         
+        <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
+        
         <paper-header-panel class="flex" mode="waterfall">
-            <paper-toolbar>
-                <div>Convoo</div>
+        
+                <paper-toolbar id="mainToolbar" >
+        
+
+          <span class="space"></span>
+
+          <!-- Toolbar icons -->
+          <paper-icon-button icon="refresh"></paper-icon-button>
+          <paper-icon-button icon="search"></paper-icon-button>
+
+          <!-- Application name -->
+          <div class="middle middle-container">
+            <div class="app-name">Convoo</div>
+          </div>
+
+
             </paper-toolbar>
         </paper-header-panel>
         
@@ -111,7 +127,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </iron-pages>
 
         </div>
-
+   </paper-scroll-header-panel>
 
 
 

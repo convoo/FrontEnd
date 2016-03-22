@@ -14,9 +14,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 
-
-
- 
 <dom-module id="room-add">
   <template>
     <style>
@@ -26,15 +23,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     <section onclick="addRoom(event)">
         
-      
         <paper-button  data-dialog="add-room-modal">Add Room</paper-button>
       
         <paper-dialog id="add-room-modal" modal>
           <h2>Add Room</h2>
           <paper-input label="Room Name"></paper-input>
+          <paper-input label="Website URL"></paper-input>
             <div class="buttons">
-                <paper-button dialog-confirm autofocus>Add Room</paper-button>
                 <paper-button dialog-confirm autofocus>Close</paper-button>
+                <paper-button dialog-confirm autofocus>Add Room</paper-button>
+
             </div>
         </paper-dialog>
     </section>

@@ -66,14 +66,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <span id="browser-sync-binding"></span>
     <template is="dom-bind" id="app">
         
-        <paper-header-panel class="flex">
+        <paper-header-panel class="flex" mode="waterfall">
             <paper-toolbar>
                 <div>Convoo</div>
             </paper-toolbar>
         </paper-header-panel>
         
         
-        <div class="content">
+        <div class="content fit">
 
             <iron-pages attr-for-selected="data-route" selected="{{route}}">
 

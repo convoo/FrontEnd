@@ -1,0 +1,46 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<dom-module id="measure-latency">
+    <template>
+        <style>
+            :host {
+                display: inline-block;
+            }
+        </style>
+        {{latency}}
+        <content></content>
+    </template>
+    <script>
+        Polymer({
+    is:     "measure-latency",
+    ready:  function() {
+                socket = io('http://198.199.94.232:9000');
+
+                setInterval(function(){
+                    socket.emit('latency', Date.now(), function(startTime) {
+                        this.latency = Date.now() - startTime;
+                        console.log(this.latency);
+                    });
+                }, 3000);
+
+    },
+    
+    properties: {
+        latency: {
+            value: 100,
+            type: String
+        }
+    }
+    
+});
+
+    </script>

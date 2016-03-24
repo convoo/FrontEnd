@@ -16,28 +16,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 display: inline-block;
             }
         </style>
-        {{latency}}
-        <content></content>
     </template>
     <script>
         Polymer({
     is:     "measure-latency",
-    ready:  function() {
-                socket = io('http://198.199.94.232:9000');
-
-                setInterval(function(){
-                    socket.emit('latency', Date.now(), function(startTime) {
-                        this.latency = Date.now() - startTime;
-                        console.log(this.latency);
-                    });
-                }, 3000);
-
+    ready:  function() { 
+        socket = io('http://198.199.94.232:9000'); 
+        var that = this;
+        setInterval(function(){ 
+            socket.emit('latency', Date.now(), function(startTime) { 
+                that.latency = Date.now() - startTime; 
+            }); 
+        }, 3000); 
     },
-    
     properties: {
         latency: {
             value: 100,
-            type: String
+            type: Number,
+            notify: true,
+            reflectToAttribute: true
         }
     }
     

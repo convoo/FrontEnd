@@ -15,19 +15,52 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             :host {
                 display: inline-block;
             }
+            .chart {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    background-color: cornflowerblue;
+    width: 18px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top:1px;
+    border: 2px solid cornflowerblue;
+    border-radius: 3px;
+}
+.bar{
+    height:6px; 
+    background-color:#fff; 
+    margin-top: 1px;
+}
         </style>
+        <div class="chart">
+        <div class ="bar" style="width:{{latencyOne}}px"></div> 
+       <div class ="bar" style="width:{{latencyTwo}}px"></div>  
+        <div class ="bar" style="width:{{latencyThree}}px"></div>  
+        <div>   
     </template>
     <script>
         Polymer({
     is:     "measure-latency",
     ready:  function() { 
         socket = io('http://198.199.94.232:9000'); 
+        var counter = 0;
         var that = this;
-        setInterval(function(){ 
-            socket.emit('latency', Date.now(), function(startTime) { 
-                that.latency = Date.now() - startTime; 
-            }); 
-        }, 3000); 
+        setInterval(function(){
+            if(counter < 3) {
+               counter = counter + 1; 
+               that.counter = counter
+               socket.emit('latency', Date.now(), function(startTime) { 
+                    that.latency = Date.now() - startTime; 
+                });
+                if (that.counter == 1) {that.latencyOne = 18 - parseInt(that.latency/25);}
+                if (that.counter == 2) {that.latencyTwo =  18 - parseInt(that.latency/25);}
+                if (that.counter == 3) {that.latencyThree =  18 - parseInt(that.latency/25);}  
+             } else {counter = 0}    
+        }, 1000); 
     },
     properties: {
         latency: {

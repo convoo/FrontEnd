@@ -60,17 +60,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           
       }
       
+/* These icons below, need to scale and position automatically */
+      
       .icon{
-          padding-top: 15%;
+          padding-top: 10%;
           padding-bottom: 7px;
-          width:70px;
-          height: 70px;
+          width:50px;
+          height: 50px;
       }
       .closeIcon{
-          padding-top: 15%;
+          padding-top: 10%;
           padding-bottom: 7px;
-          width:70px;
-          height: 70px;
+          width:50px;
+          height: 50px;
           text-shadow: 1px 1px 3px black;
       }
       .imageContainer{
@@ -168,7 +170,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             
            var wantedWidth = this.width;
            var wantedHeight = this.height;
-           var wantedSmall = Math.min(wantedWidth, wantedHeight); 
            
  //---------------------- EVENT LISTENERS -----------------------//
            
@@ -202,7 +203,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 img.onload = function() {
                    var givenWidth = img.naturalWidth;
                    var givenHeight = img.naturalHeight;
-                   var givenBig = Math.max(givenWidth, givenHeight);
                    
   //----- CALCULATE THE RESIZE & CENTER
                    
@@ -222,7 +222,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     
  //----- PAINT THE CANVAS
                         
-                    // improve final qulaity with progressive downsampling     
+                    // improve final qulaity with progressive downsampling
+                    // Clauculate the number of samples to reduce by 50% for each sample, from original to target   
                                 
                     var canvas = document.createElement('canvas');
                     var ctx = canvas.getContext('2d');

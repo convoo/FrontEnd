@@ -1,0 +1,269 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+
+
+
+<dom-module id="image-resize">
+  <template>
+    <style>
+      :host {
+            display: inline-block;
+      }   
+      .dropZone{
+          border: 1px dashed #707070;
+          background-color: #3a474c;
+          position: relative;
+          overflow: hidden;
+      } 
+      
+      .fileInput{
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          left: 0;
+          outline: none;
+          cursor: pointer;
+          cursor: hand;
+          z-index: 20;
+      }
+      .messageContainer{
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 10;
+          background-color: #3a474c;
+      }
+      .message{
+          width: 100%;
+          color: #747f83;
+          font-size: 14px;
+          text-align: center;
+      }
+      
+        .closeMessage{
+          width: 100%;
+          color: #747f83;
+          font-size: 14px;
+          text-align: center;
+          text-shadow: 1px 1px 2px black;
+          
+      }
+      
+      .icon{
+          padding-top: 15%;
+          padding-bottom: 7px;
+          width:70px;
+          height: 70px;
+      }
+      .closeIcon{
+          padding-top: 15%;
+          padding-bottom: 7px;
+          width:70px;
+          height: 70px;
+          text-shadow: 1px 1px 3px black;
+      }
+      .imageContainer{
+
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 30;
+          background-color: #3a474c;
+      }
+      .image{
+
+          position: absolute;
+          top: 0;
+          left: 0; 
+          display: block;
+          cursor: pointer;
+          cursor: hand;
+      }
+      
+      .blur{
+        filter: blur(10px) brightness(0.35);
+        -webkit-filter: blur(10px) brightness(0.35);
+        -moz-filter: blur(10px) brightness(0.35);
+        -o-filter: blur(10px) brightness(0.35);
+        -ms-filter: blur(10px) brightness(0.35);
+        cursor: pointer;
+        cursor: hand;
+      }
+      
+      .deleteContainer{
+          position: absolute;
+          top: 0;
+          left: 0; 
+          z-index: 35; 
+          cursor: pointer;
+          cursor: hand;
+      }
+      
+      .show{
+          display: inline-block
+      }
+      
+      .hide{
+          display: none;
+      }
+
+      
+      
+      
+    </style>
+  <content></content>
+    <div class="dropZone" style="width:{{width}}px; height:{{height}}px">
+        
+        <div class="messageContainer" id="messageContainer" style="width:{{width}}px; height:{{height}}px">  
+            <div class="message"><iron-icon icon="add-circle-outline" class="icon"></iron-icon></div>
+            <div class="message">drop a cover shot </div>
+        </div>
+        
+        <form id="form">
+        <input type="file" id="getImage" class="fileInput" title="Click or drag a file here" style="width:{{width}}px; height:{{height}}px"/>
+        </form>
+        
+        <div class="imageContainer hide" id="imageContainer">
+            <img src="" id="image" class="image">
+        </div>
+        
+        <div class="deleteContainer hide" id="deleteContainer" style="width:{{width}}px; height:{{height}}px">
+           <div class="message"><iron-icon icon="remove-circle-outline" class="closeIcon"></iron-icon></div>
+            <div class="closeMessage" >remove image</div>  
+        </div>
+          
+    </div>
+
+
+
+
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'image-resize',
+
+      properties: {
+         width: Number,
+         height: Number
+      },
+      
+       ready: function() {
+
+
+ //---------------------- SIZE WE WANT -----------------------//
+            
+           var wantedWidth = this.width;
+           var wantedHeight = this.height;
+           var wantedSmall = Math.min(wantedWidth, wantedHeight); 
+           
+ //---------------------- EVENT LISTENERS -----------------------//
+           
+            this.$.getImage.onchange = function() {imageResize(wantedWidth, wantedHeight, this.files);};  
+            this.$.image.addEventListener("mouseover", blur);
+            this.$.image.addEventListener("mouseout", unblur);
+            this.$.deleteContainer.addEventListener("mouseover", blur);
+            this.$.deleteContainer.addEventListener("mouseout", unblur);
+            this.$.deleteContainer.addEventListener("click", reset);
+           
+
+ //---------------------- IMAGE RESIZE -----------------------//
+  
+        var imageResize = function(Width, Height, files) {
+                var selectedFile = files[0];
+
+                File.prototype.convertToBase64 = function(callback) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                    callback(e.target.result);
+                };
+                reader.readAsDataURL(this);
+            };
+
+            selectedFile.convertToBase64(function(base64) {
+                var img = document.createElement('img');
+                img.src = base64;
+                
+  //----- SIZE THEY GAVE US
+    
+                img.onload = function() {
+                   var givenWidth = img.naturalWidth;
+                   var givenHeight = img.naturalHeight;
+                   var givenBig = Math.max(givenWidth, givenHeight);
+                   
+  //----- CALCULATE THE RESIZE & CENTER
+                   
+                    var PercentA = givenWidth / wantedWidth;
+                    var TestA = givenHeight / PercentA;
+
+            if ( TestA > wantedHeight ){
+                    var resizeWidth = givenWidth / PercentA;
+                    var resizeHeight = givenHeight / PercentA; 
+            } else {
+                    var PercentB = givenHeight / wantedHeight; 
+                    var resizeWidth = givenWidth / PercentB;
+                    var resizeHeight = givenHeight / PercentB; 
+            }
+                    var centerWidth = 0 - ((resizeWidth - wantedWidth) /2);
+                    var centerHeight = 0 - ((resizeHeight - wantedHeight) /2);
+                    
+ //----- PAINT THE CANVAS
+                        
+                    // improve final qulaity with progressive downsampling     
+                                
+                    var canvas = document.createElement('canvas');
+                    var ctx = canvas.getContext('2d');
+                    canvas.width = Width;
+                    canvas.height = Height;
+                    ctx.drawImage(this, centerWidth, centerHeight, resizeWidth, resizeHeight);
+                    document.getElementById("imageContainer").classList.add("show");
+                    document.getElementById("imageContainer").classList.remove("hide");
+                    document.getElementById("image").src = canvas.toDataURL();
+                    
+                };
+            });
+        };
+                       
+
+  //---------------------- BLUR & RESET  -----------------------//
+           
+            function blur(){                
+                    document.getElementById('image').classList.add("blur");
+                    document.getElementById("deleteContainer").classList.add("show");
+                    document.getElementById("deleteContainer").classList.remove("hide");
+            }
+            function unblur(){ 
+                   document.getElementById('image').classList.remove("blur");
+                   document.getElementById("deleteContainer").classList.remove("show");
+                   document.getElementById("deleteContainer").classList.add("hide");
+            }
+            function reset(){ 
+                   document.getElementById("deleteContainer").classList.add("hide");
+                   document.getElementById("imageContainer").classList.add("hide");
+                   document.getElementById("form").reset();
+            }   
+     
+     
+ //---------------------- END -----------------------//            
+       }
+
+});
+    
+
+    
+  })();
+  </script>
+</dom-module>

@@ -1,0 +1,303 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+
+<dom-module id="tag-list">
+  <template>
+    <style>
+      :host {
+            display: inline-block;
+            height: 20px;
+      }
+      .tagContainer{
+       
+         position: relative;
+         top:10px; 
+         border: 2px;    
+      }
+      
+      
+      
+      
+
+      .tagCenter{
+          min-width: 20px;
+          height: 18px;
+          float: left;
+          display:block;
+          position: relative;
+          top:-9px;
+          left: 15px;  
+          z-index: 5;
+      }
+      
+
+      .tagText{
+          color: #dfe1e2;
+          min-width: 30px;
+          outline: none;
+          border: none;
+          position: relative;
+          top:0px;
+          left:-15px;
+          padding-left: 30px;
+          padding-right: 30px;
+          font-size: 11px;
+          height:19px;
+          display: block;
+          text-transform: uppercase;
+      }
+      
+      .cls3{
+          cursor: hand;
+          cursor: pointer;
+      }
+
+    </style>
+  <content></content>
+  
+
+    
+  <script>
+    function poper(){
+        console.log('pop');
+    }    
+  </script>  
+    
+<div class="tagContainer" id="tagContainer" style$="width:{{startWidth}}px; height:{{startHeight}}px">
+
+
+<!-- ---------- SVG START ------------- -->
+<svg xmlns='http://www.w3.org/2000/svg' viewBox$='0 0 {{startWidth}} {{startHeight}}' id="svgroot" width="100%" height="100%">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #616c70;
+      }
+    </style> 
+  </defs>
+
+
+<!-- ---------- Left ------------- -->
+  <g>
+    <g id="Arrow">
+      <path class="cls-1" d="M14.91,31.8H12.56a2.91,2.91,0,0,1-2.06-.86l-8-8.14a2.7,2.7,0,0,1,0-3.78l8.08-8.14A2.72,2.72,0,0,1,12.62,10h2.29V8.31H12.56A4.46,4.46,0,0,0,9.35,9.68L1.27,17.88a4.39,4.39,0,0,0,0,6.13l8.08,8.08a4.56,4.56,0,0,0,3.21,1.38h2.35V31.8Z"/>
+    </g>
+    <g id="Circle">
+      <path class="cls-1" d="M7.92,18.28a3.77,3.77,0,1,0,5.33,0A3.74,3.74,0,0,0,7.92,18.28ZM12,22.41a2.07,2.07,0,1,1,0-2.92A2,2,0,0,1,12,22.41Z"/>
+    </g>
+  </g>
+
+<!-- ---------- Right ------------- -->
+
+<svg id="CenterTop2" xmlns="http://www.w3.org/2000/svg" viewBox$="0 0 {{startWidth}} {{startHeight}}" x$="{{rightPos}}">
+  <defs>
+    <style>
+
+
+      .cls-2 {
+        fill: #616c70;
+      }
+
+      .cls-3 {
+        fill: #dfe1e2;
+        cursor: hand;
+        cursor: pointer;
+        opacity: 0
+      }
+      
+    </style>
+  </defs>
+   
+<path class="cls-2" d="M42.44,9.74a4.51,4.51,0,0,0-3.21-1.32H36.71a0.86,0.86,0,0,0,0,1.72h2.52a2.69,2.69,0,0,1,2,.86,2.92,2.92,0,0,1,.86,2V28.94a2.69,2.69,0,0,1-.86,2,3,3,0,0,1-2,.86H17.91v1.66H39.23a4.54,4.54,0,0,0,4.53-4.53V13A4.51,4.51,0,0,0,42.44,9.74Z"/>
+  <g>
+    <path style$="opacity:{{show}}; fill:#{{deleteColor}}" onclick="clicker()" class="cls-3" d="M31.89,12.09a7.09,7.09,0,1,0-10,0A7.13,7.13,0,0,0,31.89,12.09ZM23,10.89a5.43,5.43,0,1,1,7.68,0A5.43,5.43,0,0,1,23,10.89Z"/>
+    <path style$="opacity:{{show}}; fill:#{{deleteColor}}" onclick="clicker()" class="cls-3" d="M29.54,8.54L28.05,7l1.49-1.49a0.85,0.85,0,0,0-1.2-1.2L26.85,5.85,25.36,4.36a0.85,0.85,0,0,0-1.2,1.2L25.65,7,24.21,8.54a0.85,0.85,0,1,0,1.2,1.2l1.49-1.49L28.4,9.74a0.83,0.83,0,0,0,1.2,0A1,1,0,0,0,29.54,8.54Z"/>
+  </g>
+
+
+  <script>
+      
+
+
+
+      function clicker(){
+           window.parent.poper();
+           console.log('clicked');
+           
+                   
+           
+      }
+   
+</script>
+</svg>
+
+
+<!-- ---------- Right END ------------- -->
+
+
+<!-- ---------- Center ------------- -->
+<svg id="CenterTop" xmlns="http://www.w3.org/2000/svg" viewBox$="0 0 {{startWidth}} {{startHeight}}">
+  <defs>
+    <style>
+      .cls-5 {
+        fill: #616c70;
+      }
+
+      .cls-6 {
+        fill: #616c70;
+      }
+     .cls-6b {
+        fill: #616c70;
+      }
+    </style>
+  </defs>
+
+   <rect style$="opacity:{{hide}}" class="cls-6b" x$="{{rightPos}}" y="8.4" width="37" height="1.62"/>
+  <rect class="cls-5" x="14" y="8.4" width$="{{barsWidth}}" height="1.62"/>
+  <rect class="cls-6" x="14" y="31.8" width$="{{barsWidth}}" height="1.66"/>
+
+
+  
+</svg>
+<!-- ---------- Center END ------------- -->
+  
+ <!-- ---------- Delete Start ------------- --> 
+  
+  <svg id="Delete" class="cls-6a" xmlns="http://www.w3.org/2000/svg" width="43.75" height="34.51" x$="{{rightPos}}" viewBox$="0 0 {{startWidth}} {{startHeight}}" onclick="clicker()">
+  <defs>
+    <style>
+      .cls-6a {
+        fill: white;
+        fill-opacity:0;
+        cursor: hand;
+        cursor: pointer;
+        z-index: 100;
+      }
+    </style>
+  </defs>
+  <title>Delete</title>
+   <rect class="cls-6a" x="19.42" width="14.87" height="14.87"/>
+
+ <!--<circle onclick="clicker()" class="cls-6a" cx="26.88" cy="8.12" r="8.12"/>-->
+
+</svg>
+   <!-- ---------- Delete End ------------- --> 
+  
+  
+</svg>
+<!-- ---------- SVG END ------------- -->
+   
+</div>
+
+
+    <div class="tagCenter" id="tagCenter">
+    <span contenteditable="true" class="tagText" id="tagText" style$="color:#{{fontColor}}">{{value}}</span>
+    </div>
+
+  </template>
+  <script>
+  (function() {
+    'use strict';
+        
+    Polymer({
+      is: 'tag-list',
+
+      properties: {
+         value: String,
+         background: String
+      },
+      
+       ready: function() {
+        var that = this;
+        that.startWidth = 70;
+        that.startHeight = 34;
+        that.barsWidthTop = 29;
+        that.rightPos = 25
+        
+        if (that.background =='light'){
+            that.fontColor = '616c70';
+            that.deleteColor = 'e84a5f';
+        }
+        
+        if (that.background =='dark'){
+            that.fontColor = 'dfe1e2'
+            that.deleteColor = 'dfe1e2';
+        }
+    
+setTimeout(function(){ setWidth(); }, 1);    
+this.$.tagText.addEventListener("input", setWidth);
+
+
+this.$.tagText.addEventListener('keypress', function(evt) {
+    if (evt.which === 13) {
+        evt.preventDefault();
+    }
+});
+
+this.$.tagContainer.addEventListener('mouseenter', function(e) {
+    e.stopPropagation();
+that.show='1';
+that.hide='0';
+
+});
+
+this.$.tagText.addEventListener('mouseenter', function(e) {
+    e.stopPropagation();
+    that.show='1';
+    that.hide='0';
+});
+
+this.$.tagContainer.addEventListener('mouseleave', function(e) {
+    e.stopPropagation();
+    that.show='0';
+    that.hide='1';
+});
+
+this.$.tagText.addEventListener('mouseleave', function(e) {
+    e.stopPropagation();
+    that.show='0';
+    that.hide='1';
+
+});
+
+
+
+
+
+
+    function pinger(){
+        console.log('ping');
+    }    
+    
+     function setWidth(){
+              var newWidth = document.getElementById("tagText").clientWidth;
+              that.newWidth = newWidth
+             
+             if(newWidth >= 30){         
+                that.startWidth = 70 + (newWidth -70);
+                that.barsWidth = 29 + (newWidth -70);
+                that.rightPos = 25 + (newWidth -70);
+             }          
+    }
+    
+
+
+ 
+             
+        }
+
+    });
+    
+  })();
+  </script>
+</dom-module>

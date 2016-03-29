@@ -21,8 +21,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             display: inline-block;
       }   
       .dropZone{
-          border: 1px dashed #707070;
-          background-color: #3a474c;
+          border: 1px solid #eeeeee;
           position: relative;
           overflow: hidden;
       } 
@@ -42,7 +41,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           top: 0;
           left: 0;
           z-index: 10;
-          background-color: #3a474c;
       }
       .message{
           width: 100%;
@@ -56,7 +54,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           color: #747f83;
           font-size: 14px;
           text-align: center;
-          text-shadow: 1px 1px 2px black;
+
           
       }
       
@@ -73,7 +71,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           padding-bottom: 7px;
           width:50px;
           height: 50px;
-          text-shadow: 1px 1px 3px black;
       }
       .imageContainer{
 
@@ -82,6 +79,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           left: 0;
           z-index: 30;
           background-color: #3a474c;
+          
       }
       .image{
 
@@ -103,6 +101,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         cursor: hand;
       }
       
+      
+       .blurLight{
+        filter: blur(25px) brightness(2.5) ;
+        -webkit-filter: blur(25px) brightness(2.5) ;
+        -moz-filter: blur(25px) brightness(2.5);
+        -o-filter: blur(25px) brightness(2.5);
+        -ms-filter: blur(25px) brightness(2.5);
+        cursor: pointer;
+        cursor: hand;
+      }
+      
       .deleteContainer{
           position: absolute;
           top: 0;
@@ -119,15 +128,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .hide{
           display: none;
       }
+      
+
 
       
       
       
     </style>
   <content></content>
-    <div class="dropZone" style="width:{{width}}px; height:{{height}}px">
+    <div class="dropZone" id="dropZone" style="width:{{width}}px; height:{{height}}px; background-color: #{{backgroundColor}};">
         
-        <div class="messageContainer" id="messageContainer" style="width:{{width}}px; height:{{height}}px">  
+        <div class="messageContainer" id="messageContainer" style="width:{{width}}px; height:{{height}}px; background-color: #{{backgroundColor}};">  
             <div class="message"><iron-icon icon="add-circle-outline" class="icon"></iron-icon></div>
             <div class="message">drop a cover shot </div>
         </div>
@@ -137,7 +148,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </form>
         
         <div class="imageContainer hide" id="imageContainer">
-            <img src="" id="image" class="image">
+            <img src="" id="image" class="image" style="background-color: #{{backgroundColor}};">
         </div>
         
         <div class="deleteContainer hide" id="deleteContainer" style="width:{{width}}px; height:{{height}}px">
@@ -160,10 +171,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       properties: {
          width: Number,
-         height: Number
+         height: Number,
+         background: String
       },
       
        ready: function() {
+
+var that=this;
+
+if(this.background == 'dark'){
+    this.backgroundColor = '3a474c';
+    this.foreroundColor = '747f83';
+}
+
+if(this.background == 'light'){
+    this.backgroundColor = 'fff';
+    this.foreroundColor = '747f83';
+    
+}
 
 
  //---------------------- SIZE WE WANT -----------------------//
@@ -241,20 +266,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   //---------------------- BLUR & RESET  -----------------------//
            
-            function blur(){                
+            function blur(){
+                if (that.background =='light'){                
+                    document.getElementById('image').classList.add("blurLight");
+                }
+                if (that.background =='dark'){                
                     document.getElementById('image').classList.add("blur");
+                }
                     document.getElementById("deleteContainer").classList.add("show");
                     document.getElementById("deleteContainer").classList.remove("hide");
+                    document.getElementById("messageContainer").classList.add("hide"); 
             }
             function unblur(){ 
+                if (that.background =='light'){  
+                   document.getElementById('image').classList.remove("blurLight");
+                }
+                if (that.background =='dark'){  
                    document.getElementById('image').classList.remove("blur");
+                }
                    document.getElementById("deleteContainer").classList.remove("show");
                    document.getElementById("deleteContainer").classList.add("hide");
+                   document.getElementById("messageContainer").classList.remove("hide");
+
             }
-            function reset(){ 
+            function reset(){
                    document.getElementById("deleteContainer").classList.add("hide");
                    document.getElementById("imageContainer").classList.add("hide");
-                   document.getElementById("form").reset();
+                   document.getElementById("form").reset();        
             }   
      
      

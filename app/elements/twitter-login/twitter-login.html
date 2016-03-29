@@ -24,41 +24,55 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
-    <section onclick="loginTwitter(event)">
-        
+    <section>
+        <p id="twitterRequestToken">twitter login</p>
       
-        <paper-button  data-dialog="login-modal">Login</paper-button>
-      
-        <paper-dialog id="login-modal" modal>
-          <h2>Login</h2>
-            <p>We are about to redirect you to twitter</p>
-            <div class="buttons">
-                <paper-button dialog-confirm autofocus>Cancel</paper-button>
-            </div>
-        </paper-dialog>
+
     </section>
   </template>
-  <script>
+ <script>
   (function() {
     'use strict';
- 
-    new Polymer({
-      is: 'twitter-login'
+
+    Polymer({
+      is: 'twitter-login',
+
+      properties: {
+        name: String,
+        id: Number,
+      },
+      
+        ready: function() {
+            
+         
+            
+            this.$.twitterRequestToken.addEventListener("click", twitterRequestToken);
+        
+            
+            var jwt = localStorage.getItem("jwt");
+            var socket = io('http://198.199.94.232:9000');
+            
+            socket.emit('jwt', {jwt:jwt});  
+            socket.on('jwt', function (data) {
+                localStorage.setItem("jwt", data.token);
+            });
+          
+          
+          function twitterRequestToken(){
+            socket.emit('twitterRequestToken', {jwt:jwt});  
+              console.log('fired');
+          }
+            socket.on('twitterRequestToken', function (data) {
+               window.location = data.redirectUrl;
+            });                    
+
+            
+          
+
+      }
+      
+      
     });
   })();
-  function loginTwitter(e) {
-      var button = e.target;
-      while (!button.hasAttribute('data-dialog') && button !== document.body) {
-          button = button.parentElement;
-      }
-      if (!button.hasAttribute('data-dialog')) {
-          return;
-      }
-      var id = button.getAttribute('data-dialog');
-      var dialog = document.getElementById(id);
-      if (dialog) {
-          dialog.open();
-      }
-  }
   </script>
 </dom-module>

@@ -184,7 +184,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
     <div class="tagCenter" id="tagCenter">
-    <span contenteditable="true" class="tagText" id="tagText" style="color:#{{fontcolor}}">{{value}}</span>
+    <span contenteditable="true" class="tagText" id="tagText" style="color:#{{fontColor}}">{{value}}</span>
     </div>
 {{rightpos}} 
   </template>
@@ -200,81 +200,120 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       properties: {
          value: String,
-         background: String
+         
+         background:{
+           type:String,
+           value:'light'  
+         }, 
+         fontColor:{
+             type:String,
+             computed:'computeFontColor(background)'
+         }, 
+             deleteColor:{
+             type:String,
+             computed:'computeDeleteColor(background)'
+         }, 
+         startwidth: {
+             type: Number,
+             value: 70
+            },
+         startheight: {
+             type: Number,
+             value: 70
+            },
+         rightPos: {
+             type:Number,
+             value: 25
+            }
       },
       
+      listeners: {
+        'tagText.input': 'setWidth',
+        'tagText.keypress': 'cancelEnter',
+        'tagContainer.mouseenter': 'showDelete',
+        'tagText.mouseenter':'showDelete',
+        'tagContainer.mouseenter': 'hideDelete',
+        'tagText.mouseenter':'hideDelete'
+        
+      },
+      
+       attached: function() {
+            this.setWidth()
+        },
+
        ready: function() {
-             var that = this;
-           
-        if (this.background =='light'){
-            this.fontcolor = '616c70';
-            this.deleteColor = 'e84a5f';
+              this.setWidth()             
+        }, // End Ready
+
+        computeFontColor: function(background){
+         
+      switch(background) {
+        case 'light':
+            return '616c70';
+        break;
+        case 'dark':
+        return 'dfe1e2';
+        break;
+        default:
+        return '000';
         }
         
-        if (this.background =='dark'){
-            this.fontColor = 'dfe1e2'
-            this.deleteColor = 'dfe1e2';
+        },
+        
+        
+       computeDeleteColor: function(background){
+         
+      switch(background) {
+        case 'light':
+            return 'e84a5f';
+        break;
+        case 'dark':
+        return 'dfe1e2';
+        break;
+        default:
+        return '000';
         }
-           
-this.$.tagText.addEventListener('keypress', function(e) {
-    if (e.which === 13) {
-        e.preventDefault();
-    }
-});
+        
+        },
+        
+        
 
-this.$.tagContainer.addEventListener('mouseenter', function(e) {
-    that.show='1';
-    that.hide='0';
-});
+        hideDelete: function(e){
+            this.show='0';
+            this.hide='1';
+        },      
 
-this.$.tagText.addEventListener('mouseenter', function(e) {
-    that.show='1';
-    that.hide='0';
-});
+        cancelEnter: function(e){
+            if (e.which === 13) {
+                e.preventDefault();
+            }   
+        },
+        
+        showDelete: function(e){
+            this.show='1';
+            this.hide='0';
+        },
 
-this.$.tagContainer.addEventListener('mouseleave', function(e) {
-    that.show='0';
-    that.hide='1';
-});
-
-this.$.tagText.addEventListener('mouseleave', function(e) {
-    that.show='0';
-    that.hide='1';
-
-});
-
-
-
-this.$.tagText.addEventListener("input", setWidth);
-
-
+        
+        setWidth: function(){
+            
+            console.log('startwidth: ', this.startwidth);
     
-
-        
-// When element loads st the width of it   
-setTimeout(function(){ 
-    setWidth(); 
-}, 1);   
-
-
-
-//// THE PROBLEM IS IN HERE! /////       
-
-     function setWidth(){
-              var newWidth = document.getElementById("tagText").clientWidth;  //<<===== THIS IS WHAT GETTING THE WIDTH
-
-                that.startwidth = 70;
-                that.startheight = 34;
-                that.rightPos = 25
+            var newWidth = this.$$('#tagText').clientWidth;
+            console.log(newWidth);
+                        
+            if(newWidth >= 30){         
+            this.startwidth = 70 + (newWidth -70)
+            this.barswidth = 29 + (newWidth -70)
+            this.rightpos = 25 + (newWidth -70)
+            } 
              
-             if(newWidth >= 30){         
-                that.startwidth = 70 + (newWidth -70);
-                that.barswidth = 29 + (newWidth -70);
-                that.rightpos = 25 + (newWidth -70);
-             }          
-    }
-       
-        } // End Ready
+        }
+    
+    
+    
+    
+    
     }); // End Polymer
 })(); // END
 

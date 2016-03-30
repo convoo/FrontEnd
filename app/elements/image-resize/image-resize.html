@@ -44,7 +44,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       .message{
           width: 100%;
-          color: #747f83;
           font-size: 14px;
           text-align: center;
       }
@@ -61,28 +60,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 /* These icons below, need to scale and position automatically */
       
       .icon{
-          padding-top: 10%;
+          padding-top: 15%;
           padding-bottom: 7px;
-          width:50px;
-          height: 50px;
+          width:40px;
+          height: 40px;
       }
       .closeIcon{
-          padding-top: 10%;
+          padding-top: 15%;
           padding-bottom: 7px;
-          width:50px;
-          height: 50px;
+          width:40px;
+          height: 40px;
       }
       .imageContainer{
-
           position: absolute;
           top: 0;
           left: 0;
           z-index: 30;
-          background-color: #3a474c;
+          
           
       }
       .image{
-
           position: absolute;
           top: 0;
           left: 0; 
@@ -92,22 +89,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       
       .blur{
-        filter: blur(10px) brightness(0.35);
-        -webkit-filter: blur(10px) brightness(0.35);
-        -moz-filter: blur(10px) brightness(0.35);
-        -o-filter: blur(10px) brightness(0.35);
-        -ms-filter: blur(10px) brightness(0.35);
         cursor: pointer;
         cursor: hand;
       }
       
       
        .blurLight{
-        filter: blur(25px) brightness(2.5) ;
-        -webkit-filter: blur(25px) brightness(2.5) ;
-        -moz-filter: blur(25px) brightness(2.5);
-        -o-filter: blur(25px) brightness(2.5);
-        -ms-filter: blur(25px) brightness(2.5);
         cursor: pointer;
         cursor: hand;
       }
@@ -119,6 +106,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           z-index: 35; 
           cursor: pointer;
           cursor: hand;
+          opacity: 1;
+          
       }
       
       .show{
@@ -139,21 +128,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="dropZone" id="dropZone" style="width:{{width}}px; height:{{height}}px; background-color: #{{backgroundColor}};">
         
         <div class="messageContainer" id="messageContainer" style="width:{{width}}px; height:{{height}}px; background-color: #{{backgroundColor}};">  
-            <div class="message"><iron-icon icon="add-circle-outline" class="icon"></iron-icon></div>
-            <div class="message">drop a cover shot </div>
+            <div class="message" style="color: #{{textcolor}};"><iron-icon icon="cloud-upload" class="icon"></iron-icon></div>
+            <div class="message" style="color: #{{textcolor}};">{{addtext}}</div>
         </div>
         
         <form id="form">
-        <input type="file" id="getImage" class="fileInput" title="Click or drag a file here" style="width:{{width}}px; height:{{height}}px"/>
+        <input type="file" id="getImage" class="fileInput" title="{{addtext}}" style="width:{{width}}px; height:{{height}}px;"/>
         </form>
         
         <div class="imageContainer hide" id="imageContainer">
             <img src="" id="image" class="image" style="background-color: #{{backgroundColor}};">
         </div>
         
-        <div class="deleteContainer hide" id="deleteContainer" style="width:{{width}}px; height:{{height}}px">
-           <div class="message"><iron-icon icon="remove-circle-outline" class="closeIcon"></iron-icon></div>
-            <div class="closeMessage" >remove image</div>  
+        <div class="deleteContainer hide" id="deleteContainer" style="width:{{width}}px; height:{{height}}px; background-color: #{{backgroundColor}};">
+           <div class="message" style="color: #{{textcolor}};"><iron-icon icon="delete" class="closeIcon"></iron-icon></div>
+            <div class="closeMessage" style="color: #{{textcolor}};">{{removetext}}</div>  
         </div>
           
     </div>
@@ -172,7 +161,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       properties: {
          width: Number,
          height: Number,
-         background: String
+         background: String,
+         addtext: String,
+         removetext: String
       },
       
        ready: function() {
@@ -182,11 +173,13 @@ var that=this;
 if(this.background == 'dark'){
     this.backgroundColor = '3a474c';
     this.foreroundColor = '747f83';
+    this.textcolor = 'fff';
 }
 
 if(this.background == 'light'){
     this.backgroundColor = 'fff';
     this.foreroundColor = '747f83';
+    this.textcolor = '747f83';
     
 }
 

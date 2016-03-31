@@ -42,7 +42,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 outline: none;
                 border: none;
                 position: relative;
-                top: 0px;
+                top: -1px;
                 left: -15px;
                 padding-left: 30px;
                 padding-right: 30px;
@@ -50,6 +50,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 height: 19px;
                 display: block;
                 text-transform: lowercase;
+                 word-spacing: 0.2em;
             }
             
             .cls3 {
@@ -175,7 +176,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="tagCenter" id="tagCenter">
             <span contenteditable="true" class="tagText" id="tagText" style="color:#{{fontColor}}"><content></content>{{value}}</span>
         </div>
-        {{rightpos}}
     </template>
 
 
@@ -242,6 +242,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       listeners: {
         'tagText.input': 'setWidth',
         'tagText.keypress': 'cancelEnter',
+        'tagText.blur': 'cancelSpace',
+        'tagText.focus': 'cancelUnderscore',
         'tagContainer.mouseenter': 'showDelete',
         'tagText.mouseenter':'showDelete',
         'tagContainer.mouseleave': 'hideDelete',
@@ -255,10 +257,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            }, 1)
        },
         cancelEnter: function(e){
+         //   this.$.tagText.innerHTML = this.$.tagText.innerHTML.split(' ').join('_');
             if (e.which === 13) {
                 e.preventDefault();
             }   
         },
+        
+       cancelSpace: function(e){
+           this.$.tagText.textContent = this.$.tagText.textContent.replace(/\s+/g,'_');
+           this.$.tagText.textContent = this.$.tagText.textContent.replace(/\_$/g, '');
+        },
+        
+        cancelUnderscore: function(e){
+           this.$.tagText.textContent = this.$.tagText.textContent.replace(/_+/g, " ");
+        },
+        
+ 
+        
         showDelete: function(e){
             this.show='1';
             this.hide='0';
@@ -275,7 +290,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.barswidth = 29 + (newWidth -70)
                 this.rightpos = 25 + (newWidth -70)
             }
-        }
+        },
+        
+
+
+
+
+
+        
     }); // End Polymer
 })(); // END
     </script>

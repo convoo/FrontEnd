@@ -88,34 +88,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 default:
                     return 'fff';
             }
-        },        
+        },
+        listeners: {
+            'goTwitter.click': 'twitterClicked',
+        },
+        twitterClicked: function(){
+            this.socket.emit('twitterRequestToken', {jwt: this.jwt});              
+        },
       
         ready: function() {
             
-            // I want to remove this 'goTwitter' to a listener but 
-            // im not sure how to share 'socket' and 'jwt'
-            // with ready and the twitterRequestToken function
+            this.jwt = localStorage.getItem("jwt");
+            this.socket = io('http://198.199.94.232:9000');
             
-            this.$.goTwitter.addEventListener("click", twitterRequestToken);
-            
-            var jwt = localStorage.getItem("jwt");
-            var socket = io('http://198.199.94.232:9000');
-            
-            socket.emit('jwt', {jwt:jwt});  
-            socket.on('jwt', function (data) {
+            this.socket.emit('jwt', {
+                jwt: this.jwt,
+            });
+             
+            this.socket.on('jwt', function (data) {
                 localStorage.setItem("jwt", data.token);
             });
-            
-           function twitterRequestToken(){
-            socket.emit('twitterRequestToken', {jwt:jwt});  
-           }    
                       
-            socket.on('twitterRequestToken', function(data) {
+            this.socket.on('twitterRequestToken', function(data) {
                window.location = data.redirectUrl;
             });
-            
-            
-      }, // END READY
+        }, // END READY
     }); // END POLYMER
   })();
   </script>

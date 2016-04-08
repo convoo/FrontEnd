@@ -66,36 +66,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <span id="browser-sync-binding"></span>
     <template is="dom-bind" id="app">
         
-        <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
-        
-        <paper-header-panel class="flex" mode="waterfall">
-        
-                <paper-toolbar id="mainToolbar" >
+
         
 
-          <span class="space"></span>
-
-          <!-- Toolbar icons -->
-          <paper-icon-button icon="refresh"></paper-icon-button>
-          <paper-icon-button icon="search"></paper-icon-button>
-
-          <!-- Application name -->
-          <div class="middle middle-container">
-            <div class="app-name">Convoo</div>
-          </div>
-
-
-            </paper-toolbar>
-        </paper-header-panel>
         
-        
-        <div class="content fit">
+        <convoo-header></convoo-header>
+
 
             <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
                 <!-- ------------------------------ INDEX ----------------------------------- -->
                 <section data-route="index">
-                    <paper-material elevation="1">
+                    <paper-material elevation="0">
                         <h2 class="page-title">Home</h2>
                         <h4>Rooms:</h4>
                         <room-preview-card name="Room 1" id="1">This room is about some stuff</room-preview-card>
@@ -126,18 +108,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             </iron-pages>
 
-        </div>
-   </paper-scroll-header-panel>
 
 
 
-        <paper-toast id="toast">
-            <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
-        </paper-toast>
 
-
-        <paper-toast id="caching-complete" duration="6000" text="Caching complete! This app will work offline.">
-        </paper-toast>
 
         <platinum-sw-register auto-register clients-claim skip-waiting base-uri="bower_components/platinum-sw/bootstrap">
             <platinum-sw-cache default-cache-strategy="networkFirst" cache-config-file="cache-config.json">

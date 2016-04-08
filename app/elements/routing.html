@@ -44,6 +44,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     page(app.baseUrl, function() {
       app.route = 'index';
     });
+    
+    page('/create/', function(data) {
+      app.route = 'create';
+      app.params = data.params;
+    });
 
     page('/profile/:name', function(data) {
       app.route = 'profile-info';

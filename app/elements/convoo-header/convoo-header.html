@@ -34,13 +34,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .left{
-          width: 6em;
-      }
-      .center{
+          min-width: 6em;
           flex: 1;
       }
+      .center{
+          flex: 100;
+      }
       .right{
-           width: 10em;
+          flex: 1;
+          min-width: 6.5em;
+          
       }
 
     </style>
@@ -48,7 +51,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <div class="header">
       <div class="left"><convoo-logo background="red"></convoo-logo></div>
       <div class="center"></div>
-      <div class="right"></div>
+      <div class="right"><twitter-login iconcolor="white" label="login"></twitter-login></div>
   </div>
   </template>
 

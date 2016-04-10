@@ -12,6 +12,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+
 
 
 <dom-module id="convoo-create">
@@ -20,15 +22,48 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
             display: inline-block;
             opacity: 1;
-            transition: opacity .5s ease-out;
-            -moz-transition: opacity .5s ease-out;
-            -webkit-transition: opacity .5s ease-out;
-            -o-transition: opacity .5s ease-out;
             width: 100%;
             background-color: #3a474c;
             border-radius: 2px;
            
       }
+      
+      
+          paper-input {
+        --paper-input-container-color: #d4d4d4;
+        --paper-input-container-focus-color: #32b07c;
+        --paper-input-container-invalid-color: #e84a5f;
+        --paper-input-container-input-color: #d4d4d4;
+        
+        --paper-input-container-label:#e84a5f;
+        --paper-input-container-label-focus:#e84a5f;
+    }
+    
+    paper-toggle-button{
+        
+        --paper-toggle-button-unchecked-bar-color: #e0dfdf;
+        --paper-toggle-button-unchecked-button-color: #e0dfdf;
+        --paper-toggle-button-unchecked-ink-color: #e0dfdf;
+        
+        --paper-toggle-button-checked-bar-color: #63846a;
+        --paper-toggle-button-checked-button-color: #32b07c;
+        --paper-toggle-button-checked-ink-color: #e0dfdf;
+        
+        --paper-toggle-button-unchecked-bar: #63846a;
+        --paper-toggle-button-unchecked-button: #32b07c;
+        
+        --paper-toggle-button-checked-bar: #63846a;
+        --paper-toggle-button-checked-button: #000000;
+        
+        --paper-toggle-button-label-color: #e0dfdf;
+        --paper-toggle-button-label-spacing: #000000;
+    }
+    
+    paper-fab{
+        --paper-fab-background:#32b07c
+
+    }
+    
 
 
 .create{
@@ -39,17 +74,83 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     border-radius: 2px;
     color: #d4d4d4
 }
+
+.toggle{
+    padding-left: 1em;
+}
+
+h2{
+    padding-bottom: 1.1em;
+}
+
+.borders{
+    padding-left: 1.7em;
+    padding-right: 6em;
+}
+
+  @media (max-width: 600px) {
+ .borders{
+    padding-left: 0.1em;
+    padding-right: 0.1em;
+}     
       
+  }
+.checkContainer{
+    display: flex;
+  justify-content: center;
+  height: 6em
+}
+.checkBtn{
+    align-self: flex-end;
+}      
+paper-input{
+    padding-top: 1em
+}
+
+.photoContainer{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.photoBox{
+    flex: 1;
+    align-self: center;
+    background-color: gold;
+    min-height: 200px;
+    max-height: 200px;
+    margin: 10px;
+    min-width: 300px;
+      max-width: 300px;
+}
+     
     </style>
   <content></content>
         <paper-material elevation="3" class="create">
+            
+          
             <escape-back></escape-back>
+             <div class="borders"> 
              <h2>What would you like to talk about today?</h2>
-             <paper-toggle-button>Anyone can join</paper-toggle-button>
+             <paper-toggle-button ><span class="toggle"> Anyone can join</span></paper-toggle-button>
              <paper-input label="Share a website you have found"></paper-input>
-             <paper-input label="Title" char-counter maxlength="10"></paper-input>
+             <paper-input label="Title" char-counter maxlength="60"></paper-input>
              <paper-input label="Description"></paper-input>
               <paper-input label="Tag it"></paper-input>
+               </div>
+              <div class="checkContainer">
+              <paper-fab icon="check" class="checkBtn"></paper-fab>
+              </div>
+              <div class="borders"> 
+              <h3>Preview</h3>
+              
+              <div class="photoContainer">
+                  <div class="photoBox"></div>
+                  <div class="photoBox"></div>
+                  
+              </div>
+              </div>
+        
         </paper-material>        
                  
   </template>

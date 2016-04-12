@@ -10,193 +10,126 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 <html lang="en">
 <head>
-  <base href="/">
-  <meta charset="utf-8">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="generator" content="Polymer Starter Kit">
-  <title>Convoo</title>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Polymer Starter Kit">
+    <title>Convoo</title>
 
-  <!-- Place favicon.ico in the `app/` directory -->
+    <!-- Place favicon.ico in the `app/` directory -->
 
-  <!-- Chrome for Android theme color -->
-  <meta name="theme-color" content="#2E3AA1">
+    <!-- Chrome for Android theme color -->
+    <meta name="theme-color" content="#2E3AA1">
 
-  <!-- Web Application Manifest -->
-  <link rel="manifest" href="manifest.json">
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="manifest.json">
 
-  <!-- Tile color for Win8 -->
-  <meta name="msapplication-TileColor" content="#3372DF">
+    <!-- Tile color for Win8 -->
+    <meta name="msapplication-TileColor" content="#3372DF">
 
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="PSK">
-  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="PSK">
+    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
 
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
-  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
+    <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
 
-  <!-- Tile icon for Win8 (144x144) -->
-  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <!-- Tile icon for Win8 (144x144) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
 
-  <!-- build:css styles/main.css -->
-  <link rel="stylesheet" href="styles/main.css">
-  <!-- endbuild-->
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild-->
 
-  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <!-- endbuild -->
+    <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <!-- endbuild -->
 
-  <!-- Because this project uses vulcanize this should be your only html import
+    <!-- Because this project uses vulcanize this should be your only html import
        in this file. All other imports should go in elements.html -->
-  <link rel="import" href="elements/elements.html">
+    <link rel="import" href="elements/elements.html">
 
-  <!-- For shared styles, shared-styles.html import in elements.html -->
-  <style is="custom-style" include="shared-styles"></style>
+    <!-- For shared styles, shared-styles.html import in elements.html -->
+    <style is="custom-style" include="shared-styles"></style>
 </head>
 
 <!-- ------------------------------ BODY ----------------------------------- -->
-
-<body unresolved>
-  <span id="browser-sync-binding"></span>
-  <template is="dom-bind" id="app">
-
-    <paper-drawer-panel id="paperDrawerPanel">
-      <!-- Drawer Scroll Header Panel -->
-      <paper-scroll-header-panel drawer fixed>
-
-        <!-- Drawer Toolbar -->
-        <paper-toolbar id="drawerToolbar">
-          <span class="menu-name">Menu</span>
-        </paper-toolbar>
-
-
-<!-- ------------------------------ MENU ----------------------------------- -->
-
-
-        <!-- Drawer Content -->
-        <paper-menu attr-for-selected="data-route" selected="[[route]]">
-
-          <a data-route="home" href="{{baseUrl}}">
-            <iron-icon icon="home"></iron-icon>
-            <span>Home</span>
-          </a>
-         
-
-          <a data-route="users" href="{{baseUrl}}profile/me">
-            <iron-icon icon="info"></iron-icon>
-            <span>Profile</span>
-          </a>
-
-          
-        </paper-menu>
+<body  unresolved class="fullbleed layout vertical">
+    <span id="browser-sync-binding"></span>
+    <template is="dom-bind" id="app">
+        <convoo-header></convoo-header>
         
- <!-- ------------------------------ LAYOUT ----------------------------------- -->
- 
-      </paper-scroll-header-panel>
+        <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
-      <!-- Main Area -->
-      <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
-        <!-- Main Toolbar -->
-        <paper-toolbar id="mainToolbar" class="tall">
-          <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-
-          <span class="space"></span>
-
-          <!-- Toolbar icons -->
-          <twitter-login label="login" iconcolor="white"></twitter-login>
-        
-
-          <!-- Application name -->
-          <div class="middle middle-container">
-            <div class="app-name"> <convoo-logo height="25" background="light"></convoo-logo></div>
-          </div>
-
-          <!-- Application sub title -->
-          <div class="bottom bottom-container">
-            <div class="bottom-title">The future of conversation</div>
-          </div>
-        </paper-toolbar>
-
-        <!-- Main Content -->
-        <div class="content">
-          <iron-pages attr-for-selected="data-route" selected="{{route}}">
-              
-
-
-
- <!-- ------------------------------ INDEX ----------------------------------- -->
-              
+            <!-- ------------------------------ INDEX ----------------------------------- -->
             <section data-route="index">
-              <paper-material elevation="1">
-                  <convoo-header></convoo-header>
-                  <convoo-logo height="25" background="white"></convoo-logo>
-                  <h2 class="page-title">Home</h2>
-                    <h4>Rooms:</h4>
                     <room-preview-card name="Room 1" id="1">This room is about some stuff</room-preview-card>
                     <room-preview-card name="Room 2" id="2" featured="true">This is another room about stuff</room-preview-card>
                     <room-preview-card name="Room 3" id="3" featured="1">Room 3 is really awesome</room-preview-card>
-               </paper-material>
             </section>
 
-
-    
-<!-- ------------------------------ PROFILE ----------------------------------- -->
+            <!-- ------------------------------ PROFILE ----------------------------------- -->
 
             <section data-route="profile-info">
-              <paper-material elevation="1">
-                <h2 class="page-title">User: {{params.name}}</h2>
-                <div>This is {{params.name}}'s section</div>
-              </paper-material>
+                <paper-material elevation="1">
+                    <h2 class="page-title">User: {{params.name}}</h2>
+                    <div>This is {{params.name}}'s section</div>
+                </paper-material>
             </section>
-            
-<!-- ------------------------------ ROOM ----------------------------------- -->
+
+            <!-- ------------------------------ ROOM ----------------------------------- -->
 
             <section data-route="room">
-              <paper-material elevation="1">
-                <h2 class="page-title">Room: {{params.name}}</h2>
-                <div>This is room {{params.name}}</div>
-              </paper-material>
+                <paper-material elevation="1">
+                    <h2 class="page-title">Room: {{params.name}}</h2>
+                    <div>This is room {{params.name}}</div>
+                </paper-material>
             </section>
-            
-            
-<!-- ------------------------------ SERVICE WORKERS & CACHE ----------------------------------- -->            
-            
-          </iron-pages>
-        </div>
-      </paper-scroll-header-panel>
-    </paper-drawer-panel>
-
-    <paper-toast id="toast">
-      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
-    </paper-toast>
-
-    
-    <paper-toast id="caching-complete"
-                 duration="6000"
-                 text="Caching complete! This app will work offline.">
-    </paper-toast>
-
-    <platinum-sw-register auto-register
-                          clients-claim
-                          skip-waiting
-                          base-uri="bower_components/platinum-sw/bootstrap">
-      <platinum-sw-cache default-cache-strategy="networkFirst"
-                         cache-config-file="cache-config.json">
-      </platinum-sw-cache>
-    </platinum-sw-register>
-    
-
-  </template>
+        </iron-pages>
+        
+        <platinum-sw-register auto-register clients-claim skip-waiting base-uri="bower_components/platinum-sw/bootstrap">
+            <platinum-sw-cache default-cache-strategy="networkFirst" cache-config-file="cache-config.json">
+            </platinum-sw-cache>
+        </platinum-sw-register>
+        
+    </template>
 
   <!-- build:js scripts/app.js -->
   <script src="scripts/socket.io-1.4.5.js"></script>
   <script src="scripts/app.js"></script>
   
   <!-- endbuild-->
+
+
 </body>
 
+
+
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

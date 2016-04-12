@@ -22,18 +22,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     // Middleware
-    function scrollToTop(ctx, next) {
-      app.scrollPageToTop();
-      next();
-    }
+    // function scrollToTop(ctx, next) {
+    //   app.scrollPageToTop();
+    //   next();
+    // }
 
-    function closeDrawer(ctx, next) {
-      app.closeDrawer();
-      next();
-    }
 
     // Routes
-    page('*', scrollToTop, closeDrawer, function(ctx, next) {
+    page('*', function(ctx, next) {
       next();
     });
 
@@ -44,6 +40,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     page(app.baseUrl, function() {
       app.route = 'index';
     });
+
+
 
     page('/profile/:name', function(data) {
       app.route = 'profile-info';

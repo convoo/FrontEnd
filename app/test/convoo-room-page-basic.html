@@ -10,34 +10,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <html>
-
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>Elements Test Runner</title>
-  <meta charset="UTF-8">
+  <title>convoo-room-page</title>
 
-  <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../bower_components/web-component-tester/browser.js"></script>
-</head>
 
+  <!-- Step 1: import the element to test -->
+  <link rel="import" href="../elements/convoo-room-page/convoo-room-page.html">
+
+</head>
 <body>
 
-  <script>
-    WCT.loadSuites([
-      'my-greeting-basic.html',
-      'my-greeting-basic.html?dom=shadow',
-      'my-list-basic.html',
-      'my-list-basic.html?dom=shadow',
-      'convoo-profile-page-basic.html',
-      'convoo-profile-page-basic.html?dom=shadow',
-      'convoo-index-page-basic.html',
-      'convoo-index-page-basic.html?dom=shadow',
-      'convoo-room-page-basic.html',
-      'convoo-room-page-basic.html?dom=shadow'
-    ]);
-  </script>
+<test-fixture id="basic">
+  <template>
+    <convoo-room-page></convoo-room-page>
+  </template>
+</test-fixture>
 
+<script>
+  suite('convoo-room-page tests', function() {
+    var element;
+
+    setup(function() {
+      element = fixture('basic');
+    });
+
+    test('', function() {
+
+    });
+
+  });
+</script>
 
 </body>
-
 </html>

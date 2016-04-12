@@ -1,0 +1,39 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="convoo-index-page">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <div>
+        <room-preview-card name="Room 1" id="1">This room is about some stuff</room-preview-card>
+        <room-preview-card name="Room 2" id="2" featured="true">This is another room about stuff</room-preview-card>
+        <room-preview-card name="Room 3" id="3" featured="1">Room 3 is really awesome</room-preview-card>
+    </div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'convoo-index-page',
+
+      properties: {
+        
+      }
+    });
+  })();
+  </script>
+</dom-module>

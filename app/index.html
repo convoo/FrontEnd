@@ -68,27 +68,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <!-- ------------------------------ INDEX ----------------------------------- -->
             <section data-route="index">
-                    <room-preview-card name="Room 1" id="1">This room is about some stuff</room-preview-card>
-                    <room-preview-card name="Room 2" id="2" featured="true">This is another room about stuff</room-preview-card>
-                    <room-preview-card name="Room 3" id="3" featured="1">Room 3 is really awesome</room-preview-card>
+                <convoo-index-page></convoo-index-page>
             </section>
 
             <!-- ------------------------------ PROFILE ----------------------------------- -->
 
             <section data-route="profile-info">
-                <paper-material elevation="1">
-                    <h2 class="page-title">User: {{params.name}}</h2>
-                    <div>This is {{params.name}}'s section</div>
-                </paper-material>
+                <convoo-profile-page name="{{params.name}}"></convoo-profile-page>
             </section>
 
             <!-- ------------------------------ ROOM ----------------------------------- -->
 
             <section data-route="room">
-                <paper-material elevation="1">
-                    <h2 class="page-title">Room: {{params.name}}</h2>
-                    <div>This is room {{params.name}}</div>
-                </paper-material>
+                <convoo-room-page name="{{params.name}}"></convoo-room-page>
             </section>
         </iron-pages>
         

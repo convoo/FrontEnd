@@ -1,0 +1,301 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+
+
+
+<dom-module id="image-resize">
+  <template>
+    <style>
+      :host {
+            display: inline-block;
+      }   
+      .dropZone{
+          border: 1px solid #eeeeee;
+          position: relative;
+          overflow: hidden;
+      } 
+      
+      .fileInput{
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          left: 0;
+          outline: none;
+          cursor: pointer;
+          cursor: hand;
+          z-index: 20;
+      }
+      .messageContainer{
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 10;
+      }
+      .message{
+          width: 100%;
+          font-size: 14px;
+          text-align: center;
+      }
+      
+        .closeMessage{
+          width: 100%;
+          color: #747f83;
+          font-size: 14px;
+          text-align: center;
+
+          
+      }
+      
+/* These icons below, need to scale and position automatically */
+      
+      .icon{
+          padding-top: 15%;
+          padding-bottom: 7px;
+          width:40px;
+          height: 40px;
+      }
+      .closeIcon{
+          padding-top: 15%;
+          padding-bottom: 7px;
+          width:40px;
+          height: 40px;
+      }
+      .imageContainer{
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 30;
+          
+          
+      }
+      .image{
+          position: absolute;
+          top: 0;
+          left: 0; 
+          display: block;
+          cursor: pointer;
+          cursor: hand;
+      }
+      
+      .blur{
+        cursor: pointer;
+        cursor: hand;
+      }
+      
+      
+       .blurLight{
+        cursor: pointer;
+        cursor: hand;
+      }
+      
+      .deleteContainer{
+          position: absolute;
+          top: 0;
+          left: 0; 
+          z-index: 35; 
+          cursor: pointer;
+          cursor: hand;
+          opacity: 1;
+          
+      }
+      
+      .show{
+          display: inline-block
+      }
+      
+      .hide{
+          display: none;
+      }
+      
+
+
+      
+      
+      
+    </style>
+  <content></content>
+    <div class="dropZone" id="dropZone" style="width:{{width}}px; height:{{height}}px; background-color: #{{backgroundColor}};">
+        
+        <div class="messageContainer" id="messageContainer" style="width:{{width}}px; height:{{height}}px; background-color: #{{backgroundColor}};">  
+            <div class="message" style="color: #{{textcolor}};"><iron-icon icon="cloud-upload" class="icon"></iron-icon></div>
+            <div class="message" style="color: #{{textcolor}};">{{addtext}}</div>
+        </div>
+        
+        <form id="form">
+        <input type="file" id="getImage" class="fileInput" title="{{addtext}}" style="width:{{width}}px; height:{{height}}px;"/>
+        </form>
+        
+        <div class="imageContainer hide" id="imageContainer">
+            <img src="" id="image" class="image" style="background-color: #{{backgroundColor}};">
+        </div>
+        
+        <div class="deleteContainer hide" id="deleteContainer" style="width:{{width}}px; height:{{height}}px; background-color: #{{backgroundColor}};">
+           <div class="message" style="color: #{{textcolor}};"><iron-icon icon="delete" class="closeIcon"></iron-icon></div>
+            <div class="closeMessage" style="color: #{{textcolor}};">{{removetext}}</div>  
+        </div>
+          
+    </div>
+
+
+
+
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'image-resize',
+
+      properties: {
+         width: Number,
+         height: Number,
+         background: String,
+         addtext: String,
+         removetext: String
+      },
+      
+       ready: function() {
+
+var that=this;
+
+if(this.background == 'dark'){
+    this.backgroundColor = '3a474c';
+    this.foreroundColor = '747f83';
+    this.textcolor = 'fff';
+}
+
+if(this.background == 'light'){
+    this.backgroundColor = 'fff';
+    this.foreroundColor = '747f83';
+    this.textcolor = '747f83';
+    
+}
+
+
+ //---------------------- SIZE WE WANT -----------------------//
+            
+           var wantedWidth = this.width;
+           var wantedHeight = this.height;
+           
+ //---------------------- EVENT LISTENERS -----------------------//
+           
+            this.$.getImage.onchange = function() {imageResize(wantedWidth, wantedHeight, this.files);};  
+            this.$.image.addEventListener("mouseover", blur);
+            this.$.image.addEventListener("mouseout", unblur);
+            this.$.deleteContainer.addEventListener("mouseover", blur);
+            this.$.deleteContainer.addEventListener("mouseout", unblur);
+            this.$.deleteContainer.addEventListener("click", reset);
+           
+
+ //---------------------- IMAGE RESIZE -----------------------//
+  
+        var imageResize = function(Width, Height, files) {
+                var selectedFile = files[0];
+
+                File.prototype.convertToBase64 = function(callback) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                    callback(e.target.result);
+                };
+                reader.readAsDataURL(this);
+            };
+
+            selectedFile.convertToBase64(function(base64) {
+                var img = document.createElement('img');
+                img.src = base64;
+                
+  //----- SIZE THEY GAVE US
+    
+                img.onload = function() {
+                   var givenWidth = img.naturalWidth;
+                   var givenHeight = img.naturalHeight;
+                   
+  //----- CALCULATE THE RESIZE & CENTER
+                   
+                    var PercentA = givenWidth / wantedWidth;
+                    var TestA = givenHeight / PercentA;
+
+            if ( TestA > wantedHeight ){
+                    var resizeWidth = givenWidth / PercentA;
+                    var resizeHeight = givenHeight / PercentA; 
+            } else {
+                    var PercentB = givenHeight / wantedHeight; 
+                    var resizeWidth = givenWidth / PercentB;
+                    var resizeHeight = givenHeight / PercentB; 
+            }
+                    var centerWidth = 0 - ((resizeWidth - wantedWidth) /2);
+                    var centerHeight = 0 - ((resizeHeight - wantedHeight) /2);
+                    
+ //----- PAINT THE CANVAS
+                        
+                    // improve final qulaity with progressive downsampling
+                    // Clauculate the number of samples to reduce by 50% for each sample, from original to target   
+                                
+                    var canvas = document.createElement('canvas');
+                    var ctx = canvas.getContext('2d');
+                    canvas.width = Width;
+                    canvas.height = Height;
+                    ctx.drawImage(this, centerWidth, centerHeight, resizeWidth, resizeHeight);
+                    document.getElementById("imageContainer").classList.add("show");
+                    document.getElementById("imageContainer").classList.remove("hide");
+                    document.getElementById("image").src = canvas.toDataURL();
+                    
+                };
+            });
+        };
+                       
+
+  //---------------------- BLUR & RESET  -----------------------//
+           
+            function blur(){
+                if (that.background =='light'){                
+                    document.getElementById('image').classList.add("blurLight");
+                }
+                if (that.background =='dark'){                
+                    document.getElementById('image').classList.add("blur");
+                }
+                    document.getElementById("deleteContainer").classList.add("show");
+                    document.getElementById("deleteContainer").classList.remove("hide");
+                    document.getElementById("messageContainer").classList.add("hide"); 
+            }
+            function unblur(){ 
+                if (that.background =='light'){  
+                   document.getElementById('image').classList.remove("blurLight");
+                }
+                if (that.background =='dark'){  
+                   document.getElementById('image').classList.remove("blur");
+                }
+                   document.getElementById("deleteContainer").classList.remove("show");
+                   document.getElementById("deleteContainer").classList.add("hide");
+                   document.getElementById("messageContainer").classList.remove("hide");
+
+            }
+            function reset(){
+                   document.getElementById("deleteContainer").classList.add("hide");
+                   document.getElementById("imageContainer").classList.add("hide");
+                   document.getElementById("form").reset();        
+            }   
+     
+     
+ //---------------------- END -----------------------//            
+       }
+
+});
+    
+
+    
+  })();
+  </script>
+</dom-module>

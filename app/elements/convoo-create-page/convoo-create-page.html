@@ -16,16 +16,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
 
-<dom-module id="convoo-create">
+<dom-module id="convoo-create-page">
   <template>
     <style>
       :host {
-            display: inline-block;
+  
             opacity: 1;
             width: 100%;
-            background-color: #3a474c;
-            border-radius: 2px;
-           
+            justify-content: center;         
       }
       
       
@@ -41,13 +39,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     
     paper-toggle-button{
         
-        --paper-toggle-button-unchecked-bar-color: #e0dfdf;
-        --paper-toggle-button-unchecked-button-color: #e0dfdf;
-        --paper-toggle-button-unchecked-ink-color: #e0dfdf;
-        
-        --paper-toggle-button-checked-bar-color: #63846a;
-        --paper-toggle-button-checked-button-color: #32b07c;
+        --paper-toggle-button-checked-bar-color: #e0dfdf;
+        --paper-toggle-button-checked-button-color: #e0dfdf;
         --paper-toggle-button-checked-ink-color: #e0dfdf;
+        
+        --paper-toggle-button-unchecked-bar-color: #63846a;
+        --paper-toggle-button-unchecked-button-color: #32b07c;
+        --paper-toggle-button-unchecked-ink-color: #e0dfdf;
         
         --paper-toggle-button-unchecked-bar: #63846a;
         --paper-toggle-button-unchecked-button: #32b07c;
@@ -72,7 +70,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     padding-top: 16px;
     padding-bottom: 16px;
     border-radius: 2px;
-    color: #d4d4d4
+    color: #d4d4d4;
+    background-color: #3a474c;
+    border-radius: 2px;
+    max-width: 960px;
+    margin: auto;
+
 }
 
 .toggle{
@@ -107,59 +110,57 @@ paper-input{
     padding-top: 1em
 }
 
-.photoContainer{
-    display: flex;
-    flex-wrap: wrap;
-    
+.previewBox{
+    width:200px;
+    height: 220px;
 }
 
-.photoBox{
-    flex: 1;
-    align-self: center;
-    background-color: gold;
-    min-height: 200px;
-    max-height: 200px;
-    margin: 10px;
-    min-width: 300px;
-      max-width: 300px;
+.previewText{
+    font-size: 0.85em;
+    color: #d4d4d4;
+    -webkit-line-clamp: 2;
+    line-height: 1.4em;
+    position: relative;
+    top: -8px;
 }
-     
-    </style>
+
+</style>
+
   <content></content>
-        <paper-material elevation="3" class="create">
-            
-          
-            <escape-back></escape-back>
-             <div class="borders"> 
-             <h2>What would you like to talk about today?</h2>
-             <paper-toggle-button ><span class="toggle"> Anyone can join</span></paper-toggle-button>
-             <paper-input label="Share a website you have found"></paper-input>
-             <paper-input label="Title" char-counter maxlength="60"></paper-input>
-             <paper-input label="Description"></paper-input>
-              <paper-input label="Tag it"></paper-input>
-               </div>
-              <div class="checkContainer">
-              <paper-fab icon="check" class="checkBtn"></paper-fab>
-              </div>
-              <div class="borders"> 
-              <h3>Preview</h3>
-              
-              <div class="photoContainer">
-                  <div class="photoBox"></div>
-                  <div class="photoBox"></div>
-                  
-              </div>
-              </div>
-        
-        </paper-material>        
+<paper-material elevation="3" class="create">
+    <escape-back></escape-back>
+    <div class="borders">
+        <h2>What would you like to talk about today?</h2>
+        <paper-toggle-button><span class="toggle"> Anyone can join</span></paper-toggle-button>
+        <paper-input label="Share a website you have found"></paper-input>
+        <paper-input label="Title" char-counter maxlength="60"></paper-input>
+        <paper-input label="Description"></paper-input>
+        <paper-input label="Tag it"></paper-input>
+        <convoo-tag background="dark"></convoo-tag>
+    </div>
+    <div class="checkContainer">
+        <paper-fab icon="check" class="checkBtn"></paper-fab>
+    </div>
+    <div class="borders">
+        <h3>Preview</h3>
+        <div class="previewBox">
+        <image-resize width="196" height="110" background="dark" addtext="upload an mage" removetext="delete"></image-resize>
+        <p class="previewText">Successfully growing pepper plants from seeds series </p>
+    </div>
+    </div>
+</paper-material>    
                  
   </template>
+  
+  
+  
+  
   <script>
   (function() {
     'use strict';
 
     Polymer({
-      is: 'convoo-create',
+      is: 'convoo-create-page',
 
       properties: {
          height: Number,

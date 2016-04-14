@@ -10,6 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner-lite.html">
 
 <dom-module id="twitter-login">
   <template>
@@ -39,6 +40,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        margin: 0px;
        padding-left: 6px;  
       }
+      paper-spinner-lite#spinner {
+          --paper-spinner-stroke-width: 1px;
+      }
+      paper-spinner-lite {
+          --paper-spinner-color: white;
+      }
     </style>
     <section>
         <paper-button id="goTwitter">
@@ -54,6 +61,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </svg>
         </div>
         <p id="twittertext" class="twittertext">{{label}}</p>
+        <paper-spinner-lite id="spinner"></paper-spinner-lite>
       </paper-button>
     </section>
   </template>
@@ -93,6 +101,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             'goTwitter.click': 'twitterClicked',
         },
         twitterClicked: function(){
+            this.$$(".twitterbird").hidden = true;
+            this.$.twittertext.hidden = true;
+            this.$.spinner.active = true;
             this.socket.emit('twitterRequestToken', {jwt: this.jwt});              
         },
       

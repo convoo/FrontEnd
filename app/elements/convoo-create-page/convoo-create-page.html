@@ -13,6 +13,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-toggle-button/paper-toggle-button.html">
 <link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-request.html">
+
 
 
 
@@ -73,7 +76,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     color: #d4d4d4;
     background-color: #3a474c;
     border-radius: 2px;
-    max-width: 960px;
+    max-width: 700px;
     margin: auto;
 
 }
@@ -118,10 +121,17 @@ paper-input{
 .previewText{
     font-size: 0.85em;
     color: #d4d4d4;
-    -webkit-line-clamp: 2;
     line-height: 1.4em;
     position: relative;
     top: -8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+#canJoin{
+    cursor: hand;
+    cursor: pointer;
 }
 
 </style>
@@ -131,12 +141,12 @@ paper-input{
     <escape-back></escape-back>
     <div class="borders">
         <h2>What would you like to talk about today?</h2>
-        <paper-toggle-button><span class="toggle"> Anyone can join</span></paper-toggle-button>
-        <paper-input label="Share a website you have found"></paper-input>
-        <paper-input label="Title" char-counter maxlength="60"></paper-input>
+        <paper-toggle-button id="canJoin" class="canJoin"><span class="toggle"> {{joinMsg}} can join</span></paper-toggle-button>
+        <paper-input label="Share a website you have found" id="webSite" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"></paper-input>
+        <paper-input label="Title" char-counter maxlength="60" id="title" value="{{title}}"></paper-input>
         <paper-input label="Description"></paper-input>
         <paper-input label="Tag it"></paper-input>
-        <convoo-tag background="dark"></convoo-tag>
+        <convoo-tag background="dark">Cat Fish</convoo-tag>
     </div>
     <div class="checkContainer">
         <paper-fab icon="check" class="checkBtn"></paper-fab>
@@ -145,15 +155,24 @@ paper-input{
         <h3>Preview</h3>
         <div class="previewBox">
         <image-resize width="196" height="110" background="dark" addtext="upload an mage" removetext="delete"></image-resize>
-        <p class="previewText">Successfully growing pepper plants from seeds series </p>
+        <p class="previewText">{{title}}</p>
     </div>
     </div>
-</paper-material>    
+</paper-material>   
+
+
+<iron-request id="fetch" response="{{response}}" status="{{status}}"></iron-request> 
+
+          
+           <div>========== {{response}} =============</div>
+            <div>========== {{status}} =============</div>
+             <div>========== {{statusText}} =============</div>
+          
                  
   </template>
   
   
-  
+
   
   <script>
   (function() {
@@ -165,7 +184,15 @@ paper-input{
       properties: {
          height: Number,
          background: String,
+         joinMsg:{
+             type:String,
+             value:'Anyone'
+         }
       },
+            listeners: {
+        'canJoin.change': 'canJoin',
+        'webSite.keyup': 'getWebsite',
+       },
       
        ready: function() {
            
@@ -185,7 +212,28 @@ paper-input{
           }
           
      
+        },
+        canJoin: function(e) {
+            var checked = this.$.canJoin.checked;
+            if (checked === true){
+                this.joinMsg = 'Only friends'
+            } else {
+                this.joinMsg = 'Anyone'
+            }
+      },
+      getWebsite: function(e){
+          var url = this.$.webSite.value;
+          var urlType = this.$.webSite.validate();
+        if(this.$.webSite.validate()){
+            this.$.fetch.send({url: this.$.webSite.value});    
         }
+          
+    console.log(this.url);
+    },
+    fetchData: function(url){
+        this.url = url
+        
+    }
 
     });
     

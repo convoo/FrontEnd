@@ -36,7 +36,7 @@ then
     if [ $1 = "dev" ]
     then
       firebase deploy --token "$FIREBASE_TOKEN" -m "Auto Deployed by Travis CI" -f devconvoo
-      elif [ $1 = "master"]
+      elif [ $1 = "master" ]
       then
       firebase deploy --token "$FIREBASE_TOKEN" -m "Auto Deployed by Travis CI"
     fi
@@ -49,10 +49,10 @@ then
   }
 
   # deploy_ghpages
-  if [$TRAVIS_BRANCH = "dev"]
+  if [ $TRAVIS_BRANCH = "dev" ]
     then
       deploy_firebase dev
-      elif [ $TRAVIS_BRANCH = "master"]
+      elif [ $TRAVIS_BRANCH = "master" ]
       then
       deploy_firebase master
     fi

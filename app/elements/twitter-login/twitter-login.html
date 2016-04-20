@@ -21,24 +21,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 15px;
         cursor: hand;
         cursor: pointer;
-       
+
       }
       .twitterbird{
        width: 15px;
-       height: 15px;  
+       height: 15px;
        position: relative;
        display: block;
-       float: left; 
+       float: left;
       }
       .twittertext{
        width: 0px;
-       height: 15px;  
+       height: 15px;
        display: block;
-       float: left;  
+       float: left;
        font-size: 14px;
-       color: white; 
+       color: white;
        margin: 0px;
-       padding-left: 6px;  
+       padding-left: 6px;
       }
       paper-spinner-lite#spinner {
           --paper-spinner-stroke-width: 1px;
@@ -49,7 +49,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 15px;
         position: relative;
         display: block;
-        float: left; 
+        float: left;
       }
     </style>
     <section>
@@ -58,7 +58,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 273.39 222.18">
                 <defs>
                     <style>
-      
+
                     </style>
                 </defs>
                 <title>TwitterLogo_white</title>
@@ -70,7 +70,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </paper-button>
     </section>
   </template>
- 
+
  <script>
   (function() {
     'use strict';
@@ -83,13 +83,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
          iconcolor:{
            type:String,
            value:'blue'
-         }, 
+         },
          fontColor:{
              type:String,
              computed:'computeFontColor(iconcolor)'
-         },   
-       }, 
-               
+         },
+       },
+
         computeFontColor: function(iconcolor) {
           switch(iconcolor) {
                 case 'white':
@@ -109,22 +109,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.$$(".twitterbird").hidden = true;
             this.$.spinner.active = true;
             this.$.spinner.classList.toggle("shown");
-            this.socket.emit('twitterRequestToken', {jwt: this.jwt});              
+            this.socket.emit('twitterRequestToken', {jwt: this.jwt});
         },
-      
+
         ready: function() {
-            
+
             this.jwt = localStorage.getItem("jwt");
-            this.socket = io('http://198.199.94.232:9000');
-            
+            this.socket = io('https://api.convoo.me');
+
             this.socket.emit('jwt', {
                 jwt: this.jwt,
             });
-             
+
             this.socket.on('jwt', function (data) {
                 localStorage.setItem("jwt", data.token);
             });
-                      
+
             this.socket.on('twitterRequestToken', function(data) {
                window.location = data.redirectUrl;
             });

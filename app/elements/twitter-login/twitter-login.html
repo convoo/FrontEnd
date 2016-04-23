@@ -11,6 +11,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner-lite.html">
+<link rel="import" href="../../bower_components/iron-location/iron-location.html">
+
 
 <dom-module id="twitter-login">
   <template>
@@ -69,6 +71,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <p id="twittertext" class="twittertext">{{label}}</p>
       </paper-button>
     </section>
+        <iron-location path="{{path}}" hash="{{hash}}" query="{{query}}" dwell-time="{{dwellTime}}"></iron-location>
   </template>
 
  <script>
@@ -83,6 +86,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
          iconcolor:{
            type:String,
            value:'blue'
+         },
+          dwellTime:{
+           type:Number,
+           value:2000
          },
          fontColor:{
              type:String,
@@ -110,6 +117,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.$.spinner.active = true;
             this.$.spinner.classList.toggle("shown");
             this.socket.emit('twitterRequestToken', {jwt: this.jwt});
+            localStorage.setItem("loc", this.path);
         },
 
         ready: function() {
@@ -136,7 +144,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             });
 
            this.socket.on('twitterCallback', function(data) {
-               localStorage.setItem("new_jwt", data.token);
+              if(data.status == "Success"){
+                  localStorage.setItem("jwt", data.jwt);
+                  localStorage.setItem("username", data.username);
+                  localStorage.setItem("photo", data.photo);
+                  localStorage.setItem("dateJoined", data.dateJoined);
+              } else {
+                // Error
+              };
             });
 
             var oauth_token = this.getParameterByName('oauth_token');
@@ -157,7 +172,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               });
               localStorage.removeItem("requestToken");
               localStorage.removeItem("requestTokenSecret");
-              window.history.replaceState( {} , 'Convoo', '/' );
+            //  window.history.replaceState( {} , 'Convoo', localStorage.getItem("loc"));
             }
 
         }, // END READY

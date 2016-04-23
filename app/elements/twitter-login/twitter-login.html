@@ -115,11 +115,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         ready: function() {
 
             this.jwt = localStorage.getItem("jwt");
-            this.socket = io('http://198.199.94.232:9000');
+            this.socket = io('http://www.website.com:8081');
 
-            this.socket.emit('jwt', {
+
+            if(!this.jwt){
+              this.socket.emit('jwt', {
                 jwt: this.jwt,
-            });
+              });
+            };
+
 
             this.socket.on('jwt', function (data) {
                 localStorage.setItem("jwt", data.token);
@@ -135,9 +139,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             var oauth_verifier = this.getParameterByName('oauth_verifier');
 
             if(oauth_token && oauth_verifier){
-              localStorage.setItem("oauth_token", oauth_token);
-              localStorage.setItem("oauth_verifier", oauth_verifier);
-              this.socket.emit('twitterAccessToken', {oauth_token: oauth_token, oauth_verifier:oauth_verifier, jwt:localStorage.getItem('jwt'), requestToken:localStorage.getItem('requestToken'), requestTokenSecret:localStorage.getItem('requestTokenSecret')});
+              localStorage.removeItem("requestToken");
+              localStorage.removeItem("requestTokenSecret");
+
+              this.socket.emit('twitterCallback', {
+
+                twitterToken:{
+                  oauthVerifier:oauth_verifier,
+                  requestToken:localStorage.getItem('requestToken'),
+                  requestTokenSecret:localStorage.getItem('requestTokenSecret')
+                },
+                jwt:localStorage.getItem('jwt'),
+
+
+              });
               window.history.replaceState( {} , 'Convoo', '/' );
             }
 

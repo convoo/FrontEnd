@@ -154,11 +154,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 },
                 jwt:localStorage.getItem('jwt'),
 
+              });
               localStorage.removeItem("requestToken");
               localStorage.removeItem("requestTokenSecret");
-
-
-              });
               window.history.replaceState( {} , 'Convoo', '/' );
             }
 

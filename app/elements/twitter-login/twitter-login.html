@@ -135,12 +135,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                localStorage.setItem("requestTokenSecret", data.requestTokenSecret);
             });
 
+           this.socket.on('twitterCallback', function(data) {
+               localStorage.setItem("new_jwt", data.token);
+            });
+
             var oauth_token = this.getParameterByName('oauth_token');
             var oauth_verifier = this.getParameterByName('oauth_verifier');
 
             if(oauth_token && oauth_verifier){
-              localStorage.removeItem("requestToken");
-              localStorage.removeItem("requestTokenSecret");
+
 
               this.socket.emit('twitterCallback', {
 
@@ -150,6 +153,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   requestTokenSecret:localStorage.getItem('requestTokenSecret')
                 },
                 jwt:localStorage.getItem('jwt'),
+
+              localStorage.removeItem("requestToken");
+              localStorage.removeItem("requestTokenSecret");
 
 
               });

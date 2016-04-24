@@ -271,6 +271,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         exit: function(){
+          this.$$(".profileCard").hidden = true;
             var jwt = localStorage.getItem("jwt");
             localStorage.clear();
             localStorage.setItem("jwt", jwt);

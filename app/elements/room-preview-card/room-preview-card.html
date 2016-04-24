@@ -18,15 +18,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: inline-block;
       }
+      .special {
+        color: #e84a5f;
+      }
     </style>
+
     <paper-card heading="{{name}}" elevation="{{elevation}}" image="{{img}}">
         <div class="card-content">
             <content></content>
         </div>
         <div class="card-actions">
-            <a href$="{{baseUrl}}{{slug}}"><paper-button raised>Join</paper-button></a>
+            <template is="dom-if" if="{{!preview}}">
+              <a href$="{{baseUrl}}/{{slug}}">
+                <paper-button raised>Join</paper-button>
+              </a>
+            </template>
+            <template is="dom-if" if="{{preview}}">
+              <paper-button disabled>Join</paper-button>
+            </template>
+
             <template is="dom-if" if="{{hasUrl}}">
-                <a href="{{url}}" target="_blank">
+                <a class="special" href="{{url}}" target="_blank">
                   <iron-icon icon="open-in-new"></iron-icon>
                 </a>
             </template>
@@ -71,7 +83,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             type: String,
             value: ""
         },
-        isPreview: {
+        preview: {
           type: Boolean,
           value: false
         }

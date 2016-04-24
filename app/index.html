@@ -62,39 +62,62 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body  unresolved class="fullbleed layout vertical">
     <span id="browser-sync-binding"></span>
     <template is="dom-bind" id="app">
+
+        <!---->
+        <!--Routing-->
+        <!---->
+        <carbon-location route="{{route}}"></carbon-location>
+
+        <!--Index-->
+        <carbon-route route="{{route}}" pattern="/:page" data="{{data}}"></carbon-route>
+        <!--Convoo-->
+        <carbon-route route="{{route}}" pattern="/c/:convoo" data="{{c}}"></carbon-route>
+        <!--Profile-->
+        <carbon-route route="{{route}}" pattern="/profile/:username" data="{{profile}}"></carbon-route>
+        <!--CreateConvoo-->
+        <carbon-route route="{{route}}" pattern="/create/:what" data="{{create}}"></carbon-route>
+
+        <!---->
+        <!--Main Page-->
+        <!---->
         <convoo-header></convoo-header>
-        
-        <iron-pages attr-for-selected="data-route" selected="{{route}}">
+
+        <iron-pages attr-for-selected="data-route" selected="{{data.page}}" fallback-selection="404">
 
             <!-- ------------------------------ INDEX ----------------------------------- -->
-            <section data-route="index">
+            <section data-route="">
                 <convoo-index-page></convoo-index-page>
             </section>
 
             <!-- ------------------------------ PROFILE ----------------------------------- -->
 
-            <section data-route="profile-info">
-                <convoo-profile-page name="{{params.name}}"></convoo-profile-page>
+            <section data-route="profile">
+                <convoo-profile-page name="{{profile.username}}"></convoo-profile-page>
             </section>
 
             <!-- ------------------------------ ROOM ----------------------------------- -->
 
-            <section data-route="room">
-                <convoo-room-page name="{{params.name}}"></convoo-room-page>
+            <section data-route="c">
+                <convoo-room-page name="{{c.convoo}}"></convoo-room-page>
             </section>
+
+            <section data-route="404">
+                Uh oh! bad page. Go back home!
+            </section>
+
         </iron-pages>
-        
+
         <platinum-sw-register auto-register clients-claim skip-waiting base-uri="bower_components/platinum-sw/bootstrap">
             <platinum-sw-cache default-cache-strategy="networkFirst" cache-config-file="cache-config.json">
             </platinum-sw-cache>
         </platinum-sw-register>
-        
+
     </template>
 
   <!-- build:js scripts/app.js -->
   <script src="scripts/socket.io-1.4.5.js"></script>
   <script src="scripts/app.js"></script>
-  
+
   <!-- endbuild-->
 </body>
 </html>

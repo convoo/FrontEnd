@@ -276,6 +276,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             localStorage.clear();
             localStorage.setItem("jwt", jwt);
             this.reComputeLogged += 1;
+            window.location = "/";
         },
 
         ready: function() {

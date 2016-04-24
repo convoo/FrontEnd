@@ -23,19 +23,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 15px;
       }
 
-      .goTwitter{
+      #goTwitter{
         cursor: hand;
         cursor: pointer;
       }
 
-      .twitterbird{
+      #twitterbird{
        width: 15px;
        height: 15px;
        position: relative;
        display: block;
        float: left;
       }
-      .twittertext{
+      #twittertext{
        width: 0px;
        height: 15px;
        display: block;
@@ -56,7 +56,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         cursor: pointer;
       }
 
-      .profileCard{
+      #profileCard{
         position: fixed;
         border-radius: 2px;
         top:50px;
@@ -137,8 +137,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     </style>
     <section>
-        <paper-button id="goTwitter" class="goTwitter" hidden="{{logged}}">
-            <div class="twitterbird">
+        <paper-button id="goTwitter" hidden="{{logged}}">
+            <div id="twitterbird">
                 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 273.39 222.18">
                     <defs>
                         <style>
@@ -150,10 +150,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </svg>
             </div>
             <paper-spinner-lite id="spinner"></paper-spinner-lite>
-            <p id="twittertext" class="twittertext">{{label}}</p>
+            <p id="twittertext">{{label}}</p>
         </paper-button>
         <paper-button hidden="{{!logged}}"><img src$="{{myImage}}" id="profilePhoto" class="profilePhoto"></paper-button>
-        <div id="profileCard" class="profileCard" hidden="{{!logged}">
+        <div id="profileCard" hidden="{{!logged}">
             <div class="pointer"></div>
 
             <div id="profileContainer">
@@ -243,7 +243,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             'exitContainer.click':'exit'
         },
         twitterClicked: function(){
-            this.$$(".twitterbird").hidden = true;
+            this.$.twitterbird.hidden = true;
             this.$.spinner.active = true;
             this.$.spinner.classList.toggle("shown");
             this.socket.emit('twitterRequestToken', {jwt: this.jwt});
@@ -253,11 +253,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
         openProfile: function(){
-          this.$$(".profileCard").hidden = false;
+          this.$.profileCard.hidden = false;
         },
 
         closeProfile: function(){
-          this.$$(".profileCard").hidden = true;
+          this.$.profileCard.hidden = true;
         },
 
         overProfile: function(){
@@ -271,7 +271,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         exit: function(){
-          this.$$(".profileCard").hidden = true;
+          this.$.profileCard.hidden = true;
             var jwt = localStorage.getItem("jwt");
             localStorage.clear();
             localStorage.setItem("jwt", jwt);
@@ -318,6 +318,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            var oauth_verifier = this.getParameterByName('oauth_verifier');
 
            if(oauth_token && oauth_verifier){
+               this.$.twitterbird.hidden = true;
+                this.$.spinner.active = true;
+                this.$.spinner.classList.toggle("shown");
               this.socket.emit('twitterCallback', {
               twitterToken:{
                   oauthVerifier:oauth_verifier,

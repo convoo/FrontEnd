@@ -24,7 +24,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <content></content>
         </div>
         <div class="card-actions">
-            <a href$="{{baseUrl}}{{id}}"><paper-button raised>Join</paper-button></a>
+            <a href$="{{baseUrl}}{{slug}}"><paper-button raised>Join</paper-button></a>
             <template is="dom-if" if="{{hasUrl}}">
                 <a href="{{url}}" target="_blank">
                   <iron-icon icon="open-in-new"></iron-icon>
@@ -46,7 +46,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       properties: {
         name: String,
-        id: Number,
+        slug: String,
         elevation: {
             type: Number,
             value: 2

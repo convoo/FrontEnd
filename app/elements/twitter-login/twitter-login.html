@@ -302,6 +302,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
            this.socket.on('twitterCallback', function(data) {
               if(data.status == "Success"){
+                    this.$.twitterbird.hidden = false;
+                    this.$.spinner.active = false;
+                    this.$.spinner.classList.toggle("shown");
                    localStorage.setItem("logged", true);
                    localStorage.setItem("jwt", data.data.jwt);
                    localStorage.setItem("username", data.data.username);
@@ -333,7 +336,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
               localStorage.removeItem("requestToken");
               localStorage.removeItem("requestTokenSecret");
-              window.history.replaceState( {} , 'Convoo', localStorage.getItem("loc"));
            }
 
 

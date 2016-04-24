@@ -18,9 +18,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     <div>
-        <room-preview-card name="Room 1" id="1">This room is about some stuff</room-preview-card>
-        <room-preview-card name="Room 2" id="2" featured="true">This is another room about stuff</room-preview-card>
-        <room-preview-card name="Room 3" id="3" featured="1">Room 3 is really awesome</room-preview-card>
+        <room-preview-card name="Room 1" id="1" url="https://google.com">This room is about some stuff</room-preview-card>
+        <room-preview-card name="Room 2" id="2" special="featured">This is another room about stuff</room-preview-card>
+        <room-preview-card name="Room 3" id="3" special="team pick">Room 3 is really awesome</room-preview-card>
     </div>
   </template>
   <script>
@@ -31,7 +31,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'convoo-index-page',
 
       properties: {
-        
+
       }
     });
   })();

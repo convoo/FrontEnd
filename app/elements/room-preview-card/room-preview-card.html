@@ -25,8 +25,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
         <div class="card-actions">
             <a href$="{{baseUrl}}{{id}}"><paper-button raised>Join</paper-button></a>
-            <template is="dom-if" if="{{featured}}">
-                <span><strong>FEATURED</strong></span>
+            <template is="dom-if" if="{{hasUrl}}">
+                <a href="{{url}}" target="_blank">
+                  <iron-icon icon="open-in-new"></iron-icon>
+                </a>
+            </template>
+
+            <template is="dom-if" if="{{isSpecial}}">
+                <span class="special"><strong>{{special}}</strong></span>
             </template>
         </div>
     </paper-card>
@@ -45,14 +51,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             type: Number,
             value: 2
         },
+        hasUrl: {
+          type: String,
+          computed: "computeIsAvailable(url)"
+        },
+        url: {
+          type: String,
+          value: ""
+        },
         img: {
             type: String,
             value: "http://lorempixel.com/200/100"
         },
-        featured: {
-            type: Boolean,
-            value: false
+        isSpecial:{
+          type: Boolean,
+          computed: "computeIsAvailable(special)"
+        },
+        special: {
+            type: String,
+            value: ""
+        },
+        isPreview: {
+          type: Boolean,
+          value: false
         }
+      },
+      computeIsAvailable: function(special){
+        if (special != "" && special != null){
+          return true;
+        }
+        return false;
       }
     });
   })();

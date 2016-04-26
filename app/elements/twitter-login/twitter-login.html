@@ -106,6 +106,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             'goTwitter.click': 'twitterClicked',
         },
         twitterClicked: function(){
+            this.unlisten(this.$.goTwitter, "click", "twitterClicked");
             this.$$(".twitterbird").hidden = true;
             this.$.spinner.active = true;
             this.$.spinner.classList.toggle("shown");

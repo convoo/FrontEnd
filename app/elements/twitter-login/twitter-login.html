@@ -11,8 +11,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner-lite.html">
-<link rel="import" href="../../bower_components/iron-location/iron-location.html">
-
 
 <dom-module id="twitter-login">
   <template>
@@ -293,7 +291,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.$.goTwitter.hidden = true;
             this.$.goTwitterLoad.hidden = false;
             this.socket.emit('twitterRequestToken', {jwt: this.jwt});
-            localStorage.setItem("loc", this.path);
+            localStorage.setItem("loc", window.location.pathname);
         },
 
         openProfile: function(){

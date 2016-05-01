@@ -1,7 +1,7 @@
 #!/bin/bash -e
 set -o pipefail
 
-if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]  && [ "$TRAVIS_NODE_VERSION" = "5.1" ]
+if ([ "$TRAVIS_BRANCH" = "master" ] || [ "$TRAVIS_BRANCH" = "dev" ]) && [ "$TRAVIS_PULL_REQUEST" = "false" ]  && [ "$TRAVIS_NODE_VERSION" = "5.1" ]
 then
   git config --global user.email "samccone@gmail.com"
   git config --global user.name "auto deployer"
@@ -33,22 +33,32 @@ then
     # Starting Build Process for Firebase Changes
     gulp
     # Starting Deploy Process to Firebaseapp.com Server -- polymer-starter-kit.firebaseapp.com
-    firebase deploy --token "$FIREBASE_TOKEN" -m "Auto Deployed by Travis CI"
+    if [ $1 = "dev" ]
+    then
+      firebase deploy --token "$FIREBASE_TOKEN" -m "Auto Deployed by Travis CI" -f devconvoo
+      elif [ $1 = "master" ]
+      then
+      firebase deploy --token "$FIREBASE_TOKEN" -m "Auto Deployed by Travis CI"
+    fi
     # Undoing Changes to PSK for Firebase
     cp app/index.html.tmp app/index.html
-    cp app/elements/routing.html.tmp app/elements/routing.html
-    rm app/elements/routing.html.tmp
     rm app/index.html.tmp
     rm firebase.json
   }
 
   # deploy_ghpages
-  deploy_firebase
+  if [ $TRAVIS_BRANCH = "dev" ]
+    then
+      deploy_firebase dev
+      elif [ $TRAVIS_BRANCH = "master" ]
+      then
+      deploy_firebase master
+    fi
 
   # Revert to orginal index.html and delete temp file
   cp app/index.html.tmp1 app/index.html
   rm app/index.html.tmp1
-elif [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]  && [ "$TRAVIS_NODE_VERSION" != "5.1" ]
+elif ([ "$TRAVIS_BRANCH" = "master" ] || [ "$TRAVIS_BRANCH" = "dev" ]) && [ "$TRAVIS_PULL_REQUEST" = "false" ]  && [ "$TRAVIS_NODE_VERSION" != "5.1" ]
 then
   echo "Do Nothing, only deploy with Node 5.1"
 else

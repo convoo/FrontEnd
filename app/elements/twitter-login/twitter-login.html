@@ -337,7 +337,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         ready: function() {
 
             this.jwt = localStorage.getItem("jwt");
-            this.socket = io('http://www.website.com:8081');
+            this.socket = io('https://www.convoo.me');
 
             if(!this.jwt){
               this.socket.emit('jwt', {

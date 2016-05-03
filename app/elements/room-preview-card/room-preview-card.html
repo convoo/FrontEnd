@@ -15,15 +15,131 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="room-preview-card">
   <template>
     <style>
-      :host {
-        display: inline-block;
+
+     :host {
+
       }
-      .special {
-        color: #e84a5f;
+
+      #subText{
+        padding: 10px;
+        font-size: 0.1em;
+        color: #7a8e95;
       }
+  /* ---------------------- Small */
+  @media (max-width: 600px) {
+
+          #titleText{
+        padding: 10px;
+        font-size: 14px;
+        color: #c8d4d8;
+        font-weight: bold;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        max-height: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        cursor: pointer;
+        cursor: hand;
+      }
+
+       #roomContainer{
+        flex: 1;
+        background-color: #3a474c;
+        min-width: 280px;
+        min-height: 300px;
+        border-radius: 2px;
+        margin: 7px 7px 30px 7px;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+      }
+
+      #roomContainer:hover{
+        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+      }
+
+      #roomImage{
+        width: 100%;
+        background-color: #2a363b;
+        height: 235px;
+        background-image: url("http://lorempixel.com/300/250");
+        background-repeat:no-repeat;
+        background-size: 100% auto;
+        background-position: 50% 50%;
+        display: block;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom: 1px solid #2a363b;
+        cursor: pointer;
+        cursor: hand;
+        -webkit-box-shadow: inset 0px 0px 12px -1px rgba(0,0,0,0.25);
+        -moz-box-shadow: inset 0px 0px 12px -1px rgba(0,0,0,0.25);
+        box-shadow: inset 0px 0px 12px -1px rgba(0,0,0,0.25);
+      }
+
+  }
+    /* ---------------------- Tablet+ */
+    @media (min-width: 601px) {
+
+      #titleText{
+        padding: 10px;
+        font-size: 14px;
+        color: #c8d4d8;
+        font-weight: bold;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        max-height: 1.7em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        cursor: pointer;
+        cursor: hand;
+      }
+
+      #roomContainer{
+        background-color: #3a474c;
+        width: 200px;
+        height: 190px;
+        border-radius: 2px;
+        margin: 7px 7px 10px 7px;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+      }
+
+       #roomContainer:hover{
+        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+      }
+
+      #roomImage{
+        width: 100%;
+        background-color: #2a363b;
+        height: 110px;
+        background-image: url("http://lorempixel.com/200/120");
+        background-repeat:no-repeat;
+        background-size: 100% auto;
+        background-position: 50% 50%;
+        display: block;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        border-bottom: 1px solid #2a363b;
+        cursor: pointer;
+        cursor: hand;
+        -webkit-box-shadow: inset 0px 0px 12px -1px rgba(0,0,0,0.25);
+        -moz-box-shadow: inset 0px 0px 12px -1px rgba(0,0,0,0.25);
+        box-shadow: inset 0px 0px 12px -1px rgba(0,0,0,0.25);
+      }
+
+  }
+
+
+
     </style>
 
-    <paper-card heading="{{name}}" elevation="{{elevation}}" image="{{img}}">
+    <div id="roomContainer">
+          <div id="roomImage"></div>
+          <div id="titleText">Some text can go in here and maybe wrap on to another line </div>
+          <div id="subText">Staff Pick</div>
+    </div>
+
+    <!--<paper-card heading="{{name}}" elevation="{{elevation}}" image="{{img}}">
         <div class="card-content">
             <content></content>
         </div>
@@ -47,7 +163,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <span class="special"><strong>{{special}}</strong></span>
             </template>
         </div>
-    </paper-card>
+    </paper-card>-->
+
+
   </template>
   <script>
   (function() {

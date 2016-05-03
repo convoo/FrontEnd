@@ -20,15 +20,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       }
 
+      iron-icon{
+        width: 14px;
+        height: 14px;
+        position: relative;
+        left: 3px;
+        top:-2px;
+        cursor: pointer;
+        cursor: hand;
+        color: #e8485f
+      }
+
       #subText{
         padding: 10px;
+        position: relative;
+        top: 5px;
         font-size: 0.1em;
         color: #7a8e95;
+        flex: 1
+      }
+
+      #subContainer{
+        display: flex;
       }
   /* ---------------------- Small */
   @media (max-width: 600px) {
 
-          #titleText{
+      #linkIcon{
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        margin-right: 10px;
+        margin-top: 10px;
+
+      }
+
+      #titleText{
         padding: 10px;
         font-size: 14px;
         color: #c8d4d8;
@@ -41,6 +68,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: -webkit-box;
         cursor: pointer;
         cursor: hand;
+      }
+
+      #titleText:hover{
+         text-decoration: underline;
       }
 
        #roomContainer{
@@ -80,6 +111,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     /* ---------------------- Tablet+ */
     @media (min-width: 601px) {
 
+      #linkIcon{
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+        margin-top: 10px;
+
+      }
+
       #titleText{
         padding: 10px;
         font-size: 14px;
@@ -93,6 +132,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: -webkit-box;
         cursor: pointer;
         cursor: hand;
+      }
+
+      #titleText:hover{
+         text-decoration: underline;
       }
 
       #roomContainer{
@@ -136,7 +179,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div id="roomContainer">
           <div id="roomImage"></div>
           <div id="titleText">Some text can go in here and maybe wrap on to another line </div>
-          <div id="subText">Staff Pick</div>
+          <div id="subContainer">
+            <div id="subText">Staff Pick</div>
+            <div id="linkIcon"><iron-icon icon="open-in-new"></iron-icon></div>
+          </div>
     </div>
 
     <!--<paper-card heading="{{name}}" elevation="{{elevation}}" image="{{img}}">

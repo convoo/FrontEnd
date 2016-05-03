@@ -9,36 +9,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 <dom-module id="convoo-index-page">
   <template>
-    <style>
+    <style include="iron-flex iron-flex-alignment iron-flex-factors">
       :host {
-        display: block;
+        /*justify-content: center;*/
       }
-
-/* ---------------------- Small */
-@media (max-width: 600px) {
-      #roomContainer{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-}
-
-
-/* ---------------------- Tablet+ */
-@media (min-width: 601px) {
-       #roomContainer{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-      }
- }
-
 
     </style>
-    <div id="roomContainer">
+      <div class="horizontal around-justified layout wrap">
         <room-preview-card name="Room 1" slug="1" url="https://google.com">This room is about some stuff</room-preview-card>
         <room-preview-card name="Room 2" slug="2" special="FEATURED">This is another room about stuff</room-preview-card>
         <room-preview-card name="Room 3" slug="3" special="STAFF PICK" preview>Room 3 is really awesome</room-preview-card>
@@ -48,7 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <room-preview-card name="Room 1" slug="1" url="https://google.com">This room is about some stuff</room-preview-card>
         <room-preview-card name="Room 2" slug="2" special="FEATURED">This is another room about stuff</room-preview-card>
         <room-preview-card name="Room 3" slug="3" special="STAFF PICK" preview>Room 3 is really awesome</room-preview-card>
-    </div>
+      </div>
   </template>
   <script>
   (function() {

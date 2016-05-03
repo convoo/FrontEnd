@@ -27,8 +27,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         left: 3px;
         top:-2px;
         cursor: pointer;
-        cursor: hand;
         color: #e8485f
+      }
+      iron-icon:hover {
+        color: #c8d4d8;
       }
 
       #subText{
@@ -178,10 +180,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div id="roomContainer">
           <div id="roomImage"></div>
-          <div id="titleText">Some text can go in here and maybe wrap on to another line </div>
+          <div id="titleText"><content></content></div>
           <div id="subContainer">
-            <div id="subText">Staff Pick</div>
-            <div id="linkIcon"><iron-icon icon="open-in-new"></iron-icon></div>
+            <div id="subText">{{special}}</div>
+            <div id="linkIcon"><a href$="{{baseUrl}}/{{slug}}"><iron-icon icon="open-in-new"></iron-icon></a></div>
           </div>
     </div>
 

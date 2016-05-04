@@ -9,29 +9,47 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
 
-<dom-module id="convoo-index-page">
+<dom-module id="convoo-add">
   <template>
     <style>
       :host {
-        display: block;
+
       }
+
+     paper-fab{
+         color: #fff;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 56px;
+        background-color: #36d1ff;
+     }
+
+     paper-fab:focus{
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 56px;
+        background-color: #36d1ff;
+     }
     </style>
-    <div>
-        <room-preview-card name="Room 1" id="1">This room is about some stuff</room-preview-card>
-        <room-preview-card name="Room 2" id="2" featured="true">This is another room about stuff</room-preview-card>
-        <room-preview-card name="Room 3" id="3" featured="1">Room 3 is really awesome</room-preview-card>
-    </div>
-    <convoo-add></convoo-add>
+
+<paper-fab icon="add"></paper-fab>
+
   </template>
   <script>
   (function() {
     'use strict';
 
     Polymer({
-      is: 'convoo-index-page',
+      is: 'convoo-add',
 
       properties: {
+        name: String,
+        id: Number,
 
       }
     });

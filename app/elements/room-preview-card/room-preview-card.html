@@ -11,17 +11,40 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 <dom-module id="room-preview-card">
   <template>
     <style include="iron-flex">
 
+ /* ---------------------- Mobile+ */
+  @media (max-width: 500px) {
+      :host{
+        max-width: 500px;
+        min-width: 285px;
+      }
+
+      #container{
+        padding-bottom: 15%;
+      }
+  }
+
+  /* ---------------------- Tablet+ */
+  @media (min-width: 501px) {
+      :host{
+        max-width: 250px;
+        min-width: 200px;
+      }
+  }
+
+  /* ---------------------- Main */
      :host {
         display: inline-block;
         margin: 0.5rem;
         padding: 0.2rem;
         cursor: pointer;
+        flex: 1;
       }
 
       paper-material:hover {
@@ -51,8 +74,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       #container{
         background-color: #3a474c;
-        width: 240px;
-        height: 200px;
+        width: auto;
         border-radius: 2px;
       }
 
@@ -71,6 +93,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
          text-decoration: underline;
       }
 
+      paper-button{
+           display: inline-block;
+      }
+
+      img{
+      height: 100%;
+      width: 100%
+      }
+
     </style>
 
     <paper-material id="container" class="layout vertical" elevation="1" animated>
@@ -78,7 +109,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <div id="title"><content></content></div>
           <div id="sub" class="layout horizontal">
             <div id="special" class="flex">{{special}}</div>
-            <div id="link"><a href$="{{baseUrl}}/{{slug}}"><iron-icon icon="open-in-new"></iron-icon></a></div>
+            <div id="link"><a href$="{{baseUrl}}/{{slug}}"><paper-button><iron-icon icon="open-in-new"></iron-icon></paper-button></a></div>
           </div>
     </paper-material>
 
@@ -107,7 +138,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
         img: {
             type: String,
-            value: "http://lorempixel.com/240/120"
+            value: "http://lorempixel.com/250/200"
         },
         isSpecial:{
           type: Boolean,

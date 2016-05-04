@@ -10,209 +10,77 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 <dom-module id="room-preview-card">
   <template>
-    <style>
+    <style include="iron-flex">
 
      :host {
+        display: inline-block;
+        margin: 0.5rem;
+        padding: 0.2rem;
+        cursor: pointer;
+      }
 
+      paper-material:hover {
+        @apply(--shadow-elevation-6dp);
+      }
+
+      #link, #special {
+        margin: 0.5rem;
+      }
+
+      #special {
+        font-size: 0.1rem;
+        color: #7a8e95;
+        position: relative;
+        top: 0.4rem;
       }
 
       iron-icon{
-        width: 14px;
-        height: 14px;
-        position: relative;
-        left: 3px;
-        top:-2px;
+        width: 0.9rem;
+        height: 0.9rem;
         cursor: pointer;
-        color: #e8485f
+        color: #e8485f;
       }
       iron-icon:hover {
         color: #c8d4d8;
       }
 
-      #subText{
-        padding: 10px;
-        position: relative;
-        top: 5px;
-        font-size: 0.1em;
-        color: #7a8e95;
-        flex: 1
+      #container{
+        background-color: #3a474c;
+        width: 240px;
+        height: 200px;
+        border-radius: 2px;
       }
 
-      #subContainer{
-        display: flex;
-      }
-  /* ---------------------- Small */
-  @media (max-width: 600px) {
-
-      #linkIcon{
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        margin-right: 10px;
-        margin-top: 10px;
-
-      }
-
-      #titleText{
-        padding: 10px;
-        font-size: 14px;
+      #title {
+        padding: 0.5rem;
+        font-size: 0.9rem;
         color: #c8d4d8;
-        font-weight: bold;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        max-height: 8px;
+        height: 1.8rem;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
         cursor: pointer;
-        cursor: hand;
       }
 
-      #titleText:hover{
+      #title:hover{
          text-decoration: underline;
       }
-
-       #roomContainer{
-        flex: 1;
-        background-color: #3a474c;
-        min-width: 280px;
-        min-height: 300px;
-        border-radius: 2px;
-        margin: 7px 7px 30px 7px;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-      }
-
-      #roomContainer:hover{
-        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
-      }
-
-      #roomImage{
-        width: 100%;
-        background-color: #2a363b;
-        height: 235px;
-        background-image: url("http://lorempixel.com/300/250");
-        background-repeat:no-repeat;
-        background-size: 100% auto;
-        background-position: 50% 50%;
-        display: block;
-        border-top-left-radius: 2px;
-        border-top-right-radius: 2px;
-        border-bottom: 1px solid #2a363b;
-        cursor: pointer;
-        cursor: hand;
-        -webkit-box-shadow: inset 0px 0px 12px -1px rgba(0,0,0,0.25);
-        -moz-box-shadow: inset 0px 0px 12px -1px rgba(0,0,0,0.25);
-        box-shadow: inset 0px 0px 12px -1px rgba(0,0,0,0.25);
-      }
-
-  }
-    /* ---------------------- Tablet+ */
-    @media (min-width: 601px) {
-
-      #linkIcon{
-        width: 16px;
-        height: 16px;
-        margin-right: 10px;
-        margin-top: 10px;
-
-      }
-
-      #titleText{
-        padding: 10px;
-        font-size: 14px;
-        color: #c8d4d8;
-        font-weight: bold;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        max-height: 1.7em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        cursor: pointer;
-        cursor: hand;
-      }
-
-      #titleText:hover{
-         text-decoration: underline;
-      }
-
-      #roomContainer{
-        background-color: #3a474c;
-        width: 200px;
-        height: 190px;
-        border-radius: 2px;
-        margin: 7px 7px 10px 7px;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-      }
-
-       #roomContainer:hover{
-        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
-      }
-
-      #roomImage{
-        width: 100%;
-        background-color: #2a363b;
-        height: 110px;
-        background-image: url("http://lorempixel.com/200/120");
-        background-repeat:no-repeat;
-        background-size: 100% auto;
-        background-position: 50% 50%;
-        display: block;
-        border-top-left-radius: 2px;
-        border-top-right-radius: 2px;
-        border-bottom: 1px solid #2a363b;
-        cursor: pointer;
-        cursor: hand;
-        -webkit-box-shadow: inset 0px 0px 12px -1px rgba(0,0,0,0.25);
-        -moz-box-shadow: inset 0px 0px 12px -1px rgba(0,0,0,0.25);
-        box-shadow: inset 0px 0px 12px -1px rgba(0,0,0,0.25);
-      }
-
-  }
-
-
 
     </style>
 
-    <div id="roomContainer">
-          <div id="roomImage"></div>
-          <div id="titleText"><content></content></div>
-          <div id="subContainer">
-            <div id="subText">{{special}}</div>
-            <div id="linkIcon"><a href$="{{baseUrl}}/{{slug}}"><iron-icon icon="open-in-new"></iron-icon></a></div>
+    <paper-material id="container" class="layout vertical" elevation="1" animated>
+          <div id="img" class="flex"><img src="{{img}}"></div>
+          <div id="title"><content></content></div>
+          <div id="sub" class="layout horizontal">
+            <div id="special" class="flex">{{special}}</div>
+            <div id="link"><a href$="{{baseUrl}}/{{slug}}"><iron-icon icon="open-in-new"></iron-icon></a></div>
           </div>
-    </div>
-
-    <!--<paper-card heading="{{name}}" elevation="{{elevation}}" image="{{img}}">
-        <div class="card-content">
-            <content></content>
-        </div>
-        <div class="card-actions">
-            <template is="dom-if" if="{{!preview}}">
-              <a href$="{{baseUrl}}/{{slug}}">
-                <paper-button raised>Join</paper-button>
-              </a>
-            </template>
-            <template is="dom-if" if="{{preview}}">
-              <paper-button disabled>Join</paper-button>
-            </template>
-
-            <template is="dom-if" if="{{hasUrl}}">
-                <a class="special" href="{{url}}" target="_blank">
-                  <iron-icon icon="open-in-new"></iron-icon>
-                </a>
-            </template>
-
-            <template is="dom-if" if="{{isSpecial}}">
-                <span class="special"><strong>{{special}}</strong></span>
-            </template>
-        </div>
-    </paper-card>-->
-
+    </paper-material>
 
   </template>
   <script>
@@ -239,7 +107,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
         img: {
             type: String,
-            value: "http://lorempixel.com/200/100"
+            value: "http://lorempixel.com/240/120"
         },
         isSpecial:{
           type: Boolean,

@@ -323,7 +323,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         ready: function() {
 
             this.jwt = localStorage.getItem("jwt");
-            this.socket = io('https://api.convoo.me');
+  // LIVE
+  //          this.socket = io('https://api.convoo.me');
+  // DEV
+              this.socket = io('www.website.com:8081');
 
             if(!this.jwt){
               this.socket.emit('jwt', {
@@ -346,10 +349,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     this.$.goTwitter.hidden = true;
                     this.$.goTwitterLoad.hidden = true;
                    localStorage.setItem("logged", true);
-                   localStorage.setItem("jwt", data.data.jwt);
-                   localStorage.setItem("username", data.data.username);
-                   localStorage.setItem("photo", data.data.photo);
-                   localStorage.setItem("dateJoined", data.data.dateJoined);
+                   localStorage.setItem("jwt", data.jwt);
+                   localStorage.setItem("username", data.username);
+                   localStorage.setItem("photo", data.photo);
+                   localStorage.setItem("dateJoined", data.dateJoined);
 
                    this.reComputeLogged += 1
               } else {

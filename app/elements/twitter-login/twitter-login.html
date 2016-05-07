@@ -324,9 +324,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             this.jwt = localStorage.getItem("jwt");
   // LIVE
-  //          this.socket = io('https://api.convoo.me');
+            this.socket = io('https://api.convoo.me');
   // DEV
-              this.socket = io('www.website.com:8081');
+  //            this.socket = io('www.website.com:8081');
 
             if(!this.jwt){
               this.socket.emit('jwt', {

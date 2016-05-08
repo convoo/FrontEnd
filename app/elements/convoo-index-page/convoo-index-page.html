@@ -18,12 +18,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     <div>
-        {{isLoggedIn}}
         <room-preview-card name="Room 1" id="1">This room is about some stuff</room-preview-card>
         <room-preview-card name="Room 2" id="2" featured="true">This is another room about stuff</room-preview-card>
         <room-preview-card name="Room 3" id="3" featured="1">Room 3 is really awesome</room-preview-card>
     </div>
-    <convoo-add hidden="{{!isLoggedIn}}"></convoo-add>
+    <convoo-add logged="{{logged}}"></convoo-add>
   </template>
   <script>
   (function() {
@@ -33,7 +32,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'convoo-index-page',
 
       properties: {
-
+            logged: {
+                type: Boolean
+            }
       }
     });
   })();

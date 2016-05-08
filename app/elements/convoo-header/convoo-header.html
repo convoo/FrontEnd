@@ -52,7 +52,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <div class="header">
       <div class="left"><convoo-logo background="red"></convoo-logo></div>
       <div class="center"></div>
-      <div class="right"><twitter-login iconcolor="white" label="login" logged="{{logged-in}}"></twitter-login></div>
+      <div class="right"><twitter-login iconcolor="white" label="login" logged="{{logged}}"></twitter-login></div>
   </div>
   </template>
 
@@ -63,7 +63,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       Polymer({
         is: 'convoo-header',
         properties: {
-            loggedIn:{
+            logged:{
                 type: Boolean,
                 reflectToAttribute: true
             }

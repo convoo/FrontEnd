@@ -184,6 +184,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     </style>
     <section>
+        {{logged}}
         <paper-button id="goTwitter" hidden="{{logged}}">
             <div id="twitterbird">
                 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 273.39 222.18">
@@ -324,7 +325,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         ready: function() {
 
             this.jwt = localStorage.getItem("jwt");
-            this.socket = io('https://api.convoo.me');
+            this.socket = io('https://www.website.com:8081');
 
             if(!this.jwt){
               this.socket.emit('jwt', {

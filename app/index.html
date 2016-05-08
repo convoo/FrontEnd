@@ -80,12 +80,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <!---->
         <!--Main Page-->
         <!---->
-        <convoo-header></convoo-header>
+        <convoo-header logged="{{isLoggedIn}}"></convoo-header>
 
         <iron-pages attr-for-selected="data-route" selected="{{data.page}}" fallback-selection="404">
 
             <!-- ------------------------------ INDEX ----------------------------------- -->
             <section data-route="">
+                {{isLoggedIn}}
                 <convoo-index-page></convoo-index-page>
             </section>
 

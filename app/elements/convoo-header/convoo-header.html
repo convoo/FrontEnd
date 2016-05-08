@@ -44,7 +44,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .right{
           flex: 1;
           min-width: 6.5em;
-          
+
       }
 
     </style>
@@ -52,7 +52,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <div class="header">
       <div class="left"><convoo-logo background="red"></convoo-logo></div>
       <div class="center"></div>
-      <div class="right"><twitter-login iconcolor="white" label="login"></twitter-login></div>
+      <div class="right"><twitter-login iconcolor="white" label="login" logged="{{logged-in}}"></twitter-login></div>
   </div>
   </template>
 
@@ -62,28 +62,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       Polymer({
         is: 'convoo-header',
-        
-     listeners: {
-        'online': 'youOnline',
-        'offline': 'youOffline'
-      },
-      
-      youOnline: function(e) {
-        alert("youOnline");
-      },
-      
-      youOffline: function(e) {
-        alert("youOffline");
-      },
-
         properties: {
-
+            loggedIn:{
+                type: Boolean,
+                reflectToAttribute: true
+            }
         }
       });
-      
 
-      
-      
+
+
+
     })();
   </script>
 </dom-module>
